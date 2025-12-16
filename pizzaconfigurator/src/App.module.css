@@ -1,0 +1,14 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.base {
+  position: relative;
+  width: 523px;
+  height: 523px;
+  background-color: rgb(255, 204, 143);
+  border-radius: 50%;
+}
