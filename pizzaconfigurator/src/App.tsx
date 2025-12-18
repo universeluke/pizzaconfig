@@ -10,6 +10,7 @@ import { supabase } from "./supabaseClient";
 function App() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [orders, setOrders] = useState<any[]>([]);
   const [user, setUser] = useState<any>(null);
 
   async function signIn() {
@@ -49,6 +50,17 @@ function App() {
     } else {
       alert("order placed");
     }
+  }
+
+  async function loadOrders() {
+    const { data, error } = await supabase.from("orders").select("*");
+
+    if (error) {
+      alert(error.message);
+      return;
+    }
+
+    setOrders(data);
   }
 
   return (
@@ -91,6 +103,15 @@ function App() {
           <>
             <p>signed in as {user.email}</p>
             <button onClick={placeOrder}>place test order</button>
+            <button onClick={loadOrders}>load my orders</button>
+
+            <ul>
+              {orders.map((order) => (
+                <li key={order.id}>
+                  {order.id} - {order.status}
+                </li>
+              ))}
+            </ul>
           </>
         )}
       </div>
