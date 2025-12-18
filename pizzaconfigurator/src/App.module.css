@@ -6,9 +6,12 @@
 }
 
 .base {
+  display: flex;
   position: relative;
-  width: 523px;
-  height: 523px;
+  width: 563px;
+  height: 563px;
   background-color: rgb(255, 204, 143);
   border-radius: 50%;
+  align-items: center;
+  justify-content: center;
 }
