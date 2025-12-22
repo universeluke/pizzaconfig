@@ -4,7 +4,7 @@ import Cheese from "./components/Cheese";
 import Tomato from "./components/Tomato";
 import Mushrooms from "./components/Mushrooms";
 import Oregano from "./components/Oregano";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { supabase } from "./supabaseClient";
 
 function App() {
@@ -62,6 +62,30 @@ function App() {
 
     setOrders(data);
   }
+
+  //adding a channel to subscribe to changes https://supabase.com/docs/reference/javascript/subscribe
+  useEffect(() => {
+    if (!user) return;
+
+    const channel = supabase
+      .channel("my-orders")
+      .on(
+        "postgres_changes",
+        {
+          event: "*",
+          schema: "public",
+          table: "orders",
+        },
+        () => {
+          loadOrders();
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  });
 
   return (
     <>
