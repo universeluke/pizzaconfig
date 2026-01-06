@@ -8,17 +8,36 @@ type Order = {
   pizza: any;
 };
 
-const KITCHEN_KEY = import.meta.env.VITE_KITCHEN_KEY;
-
 export default function App() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [user, setUser] = useState<any>("");
+
   const [orders, setOrders] = useState<Order[]>([]);
+
+  async function signIn() {
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+
+    if (error) {
+      alert(error.message);
+      return;
+    }
+
+    setUser(data.user);
+  }
+
+  async function signOut() {
+    await supabase.auth.signOut();
+    setUser(null);
+    setOrders([]);
+  }
 
   async function loadOrders() {
     const { data, error } = await supabase.functions.invoke(
-      "kitchen-list-orders",
-      {
-        headers: { "x-kitchen-key": KITCHEN_KEY },
-      }
+      "kitchen-list-orders"
     );
     if (error) {
       alert(error.message);
@@ -29,7 +48,6 @@ export default function App() {
 
   async function updateStatus(id: string, status: Order["status"]) {
     const { error } = await supabase.functions.invoke("kitchen-update-status", {
-      headers: { "x-kitchen-key": KITCHEN_KEY },
       body: { orderId: id, status },
     });
 
@@ -41,8 +59,49 @@ export default function App() {
   }
 
   useEffect(() => {
-    loadOrders();
+    supabase.auth.getUser().then(({ data }) => {
+      setUser(data.user ?? null);
+    });
   }, []);
+
+  useEffect(() => {
+    if (!user) return;
+
+    const channel = supabase
+      .channel("kitchen-orders")
+      .on(
+        "postgres_changes",
+        { event: "*", schema: "public", table: "orders" },
+        () => {
+          loadOrders();
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, [user]);
+
+  if (!user) {
+    return (
+      <div>
+        <h2>kitchen login</h2>
+        <input
+          placeholder="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        ></input>
+        <input
+          placeholder="password"
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        ></input>
+        <button onClick={signIn}>sign in</button>
+      </div>
+    );
+  }
 
   const todo = orders.filter((order) => order.status === "todo");
 
@@ -53,7 +112,9 @@ export default function App() {
   return (
     <div>
       <h2>Kitchen</h2>
-      <button onClick={loadOrders}>Refresh</button>
+      <div>signed in as {user.email}</div>
+      <button onClick={signOut}>sign out</button>
+      <button onClick={loadOrders}>load orders/refresh</button>
       <Column
         title="To do"
         orders={todo}

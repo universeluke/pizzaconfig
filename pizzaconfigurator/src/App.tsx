@@ -1,9 +1,9 @@
-import styles from "./App.module.css";
-import Pepperoni from "./components/Pepperoni";
-import Cheese from "./components/Cheese";
-import Tomato from "./components/Tomato";
-import Mushrooms from "./components/Mushrooms";
-import Oregano from "./components/Oregano";
+// import styles from "./App.module.css";
+// import Pepperoni from "./components/Pepperoni";
+// import Cheese from "./components/Cheese";
+// import Tomato from "./components/Tomato";
+// import Mushrooms from "./components/Mushrooms";
+// import Oregano from "./components/Oregano";
 import { useState, useEffect } from "react";
 import { supabase } from "./supabaseClient";
 
@@ -89,7 +89,7 @@ function App() {
 
   return (
     <>
-      <div className={styles.base}>
+      {/* <div className={styles.base}>
         <div style={{ position: "absolute" }}>
           <Tomato />
         </div>
@@ -105,7 +105,7 @@ function App() {
         <div style={{ position: "absolute" }}>
           <Oregano />
         </div>
-      </div>
+      </div> */}
       <div>
         {!user && (
           <>

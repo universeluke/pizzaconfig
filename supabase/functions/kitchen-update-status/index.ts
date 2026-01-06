@@ -5,18 +5,47 @@ const allowed = new Set(["todo", "in_progress", "done"]);
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers":
-    "authorization, x-client-info, apikey, content-type, x-kitchen-key",
+    "authorization, x-client-info, apikey, content-type",
   "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
 };
 
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") {
-  return new Response(null, {headers: corsHeaders})
-}
-  const kitchenKey = req.headers.get("x-kitchen-key");
+    return new Response(null, { headers: corsHeaders });
+  }
 
-  if (kitchenKey !== Deno.env.get("KITCHEN_KEY")) {
-    return new Response("unauthorized", { status: 401, headers: corsHeaders });
+  const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
+  const anonKey = Deno.env.get("SUPABASE_ANON_KEY")!;
+  const serviceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
+  const authHeader = req.headers.get("Authorization");
+
+  if (!authHeader) {
+    return new Response("Missing Authorization header", {
+      status: 401,
+      headers: corsHeaders,
+    });
+  }
+
+  const userClient = createClient(supabaseUrl, anonKey, {
+    global: { headers: { Authorization: authHeader } },
+  });
+
+  const { data: userData, error: userErr } = await userClient.auth.getUser();
+
+  if (userErr || !userData?.user) {
+    return new Response("Unauthorized", { status: 401, headers: corsHeaders });
+  }
+
+  const userId = userData.user.id;
+  const adminClient = createClient(supabaseUrl, serviceKey);
+  const { data: profile, error: profErr } = await adminClient
+    .from("profiles")
+    .select("role")
+    .eq("id", userId)
+    .single();
+
+  if (profErr || !profile || profile.role !== "kitchen") {
+    return new Response("Forbidden", { status: 403, headers: corsHeaders });
   }
 
   const body = await req.json().catch(() => null);
@@ -24,23 +53,21 @@ Deno.serve(async (req) => {
   const status = body?.status;
 
   if (!orderId || !allowed.has(status)) {
-    return new Response("bad request", { status: 400, headers: corsHeaders });
+    return new Response("Bad request", { status: 400, headers: corsHeaders });
   }
 
-  const supabase = createClient(
-    Deno.env.get("SUPABASE_URL")!,
-    Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!
-  );
-  const { data, error } = await supabase
+  const { data: updated, error: updErr } = await adminClient
     .from("orders")
     .update({ status })
     .eq("id", orderId)
     .select("id,status")
     .single();
 
-  if (error) return new Response(error.message, { status: 400 });
-
-  return new Response(JSON.stringify(data), {
+  if (updErr) {
+    return new Response(updErr.message, { status: 400, headers: corsHeaders });
+  }
+  
+  return new Response(JSON.stringify(updated), {
     headers: { ...corsHeaders, "Content-Type": "application/json" },
   });
 });

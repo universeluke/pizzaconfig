@@ -3,7 +3,7 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers":
-    "authorization, x-client-info, apikey, content-type, x-kitchen-key",
+    "authorization, x-client-info, apikey, content-type",
   "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
 };
 
@@ -12,26 +12,51 @@ if (req.method === "OPTIONS") {
   return new Response(null, {headers: corsHeaders})
 }
 
-  const kitchenKey = req.headers.get("x-kitchen-key");
+  const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
+  const anonKey = Deno.env.get("SUPABASE_ANON_KEY")!;
+  const serviceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
+  const authHeader = req.headers.get("Authorization");
 
-  if (kitchenKey !== Deno.env.get("KITCHEN_KEY")) {
-    return new Response("unauthorized", { status: 401, headers: corsHeaders });
+  if (!authHeader) {
+    return new Response("Missing Authorization header", {
+      status: 401,
+      headers: corsHeaders,
+    });
   }
 
-  const supabase = createClient(
-    Deno.env.get("SUPABASE_URL")!,
-    Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!
-  );
+  const userClient = createClient(supabaseUrl, anonKey, {
+    global: { headers: { Authorization: authHeader } },
+  });
 
-  const { data, error } = await supabase
+  const { data: userData, error: userErr } = await userClient.auth.getUser();
+
+  if (userErr || !userData?.user) {
+    return new Response("Unauthorized", { status: 401, headers: corsHeaders });
+  }
+
+  const userId = userData.user.id;
+  const adminClient = createClient(supabaseUrl, serviceKey);
+  const { data: profile, error: profErr } = await adminClient
+    .from("profiles")
+    .select("role")
+    .eq("id", userId)
+    .single();
+
+  if (profErr || !profile || profile.role !== "kitchen") {
+    return new Response("Forbidden", { status: 403, headers: corsHeaders });
+  }
+
+  const { data: orders, error: ordersErr } = await adminClient
     .from("orders")
     .select("id,status,user_id,pizza,created_at")
     .order("created_at", { ascending: false })
-    .limit(50);
+    .limit(100);
 
-  if (error) return new Response(error.message, { status: 400, headers: corsHeaders });
+  if (ordersErr) {
+    return new Response(ordersErr.message, { status: 400, headers: corsHeaders });
+  }
   
-  return new Response(JSON.stringify(data), {
+  return new Response(JSON.stringify(orders), {
     headers: { ...corsHeaders, "Content-Type": "application/json" },
   });
 });
