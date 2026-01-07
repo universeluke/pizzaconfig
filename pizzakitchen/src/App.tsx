@@ -4,7 +4,7 @@ import Column from "./components/Column";
 
 type Order = {
   id: string;
-  status: "todo" | "in_progress" | "done";
+  status: "todo" | "in_progress" | "done" | "collected";
   pizza: any;
 };
 
@@ -109,6 +109,8 @@ export default function App() {
 
   const done = orders.filter((order) => order.status === "done");
 
+  const collected = orders.filter((order) => order.status === "collected");
+
   return (
     <div>
       <h2>Kitchen</h2>
@@ -130,6 +132,12 @@ export default function App() {
         title="Done"
         orders={done}
         onPrev={(id) => updateStatus(id, "in_progress")}
+        onNext={(id) => updateStatus(id, "collected")}
+      />
+      <Column
+        title="Collected"
+        orders={collected}
+        onPrev={(id) => updateStatus(id, "done")}
       />
     </div>
   );

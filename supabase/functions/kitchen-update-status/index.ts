@@ -1,6 +1,6 @@
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
-const allowed = new Set(["todo", "in_progress", "done"]);
+const allowed = new Set(["todo", "in_progress", "done", "collected"]);
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -66,7 +66,7 @@ Deno.serve(async (req) => {
   if (updErr) {
     return new Response(updErr.message, { status: 400, headers: corsHeaders });
   }
-  
+
   return new Response(JSON.stringify(updated), {
     headers: { ...corsHeaders, "Content-Type": "application/json" },
   });

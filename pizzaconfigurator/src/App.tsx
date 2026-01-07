@@ -6,12 +6,37 @@
 // import Oregano from "./components/Oregano";
 import { useState, useEffect } from "react";
 import { supabase } from "./supabaseClient";
+import { useDispatch, useSelector } from "react-redux";
+import type { RootState } from "./store/store";
+import AccordionSection from "./components/AccordionSection";
+import {
+  resetPizza,
+  setCheese,
+  setNotes,
+  setSauce,
+  toggleDip,
+  toggleHerb,
+  toggleOil,
+  toggleTopping,
+} from "./store/pizzaSlice";
 
 function App() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [orders, setOrders] = useState<any[]>([]);
   const [user, setUser] = useState<any>(null);
+
+  const dispatch = useDispatch();
+  const pizza = useSelector((state: RootState) => state.pizza);
+
+  const OPTIONS = {
+    sauce: ["tomato", "basil pesto", "white", "monthly special"],
+    cheese: ["fior di latte", "mozzarella", "vegan", "none"],
+    toppings: ["pepperoni", "mushroom", "onion", "ham"],
+    oils: ["olive oil", "chilli oil"],
+    herbs: ["oregano", "basil"],
+    dips: ["garlic mayo", "bbq"],
+  };
 
   async function signIn() {
     const { data, error } = await supabase.auth.signInWithPassword({
@@ -27,16 +52,6 @@ function App() {
 
   async function placeOrder() {
     if (!user) return alert("not signedin");
-
-    const pizza = {
-      sauce: "tomato",
-      cheese: "fior di latte",
-      toppings: ["pepperoni"],
-      oils: ["olive oil"],
-      herbs: ["oregano"],
-      dips: ["garlic mayo"],
-      notes: "",
-    };
 
     const { error } = await supabase.from("orders").insert([
       {
@@ -136,6 +151,76 @@ function App() {
                 </li>
               ))}
             </ul>
+            <div>
+              <h2>Build your pizza</h2>
+
+              <AccordionSection
+                title="SAUCE"
+                options={OPTIONS.sauce}
+                mode="single"
+                value={pizza.sauce}
+                values={[]}
+                onSelect={(opt) => dispatch(setSauce(opt))}
+              />
+
+              <AccordionSection
+                title="CHEESE"
+                options={OPTIONS.cheese}
+                mode="single"
+                value={pizza.cheese}
+                values={[]}
+                onSelect={(opt) => dispatch(setCheese(opt))}
+              />
+
+              <AccordionSection
+                title="TOPPINGS"
+                options={OPTIONS.toppings}
+                mode="multi"
+                value={null}
+                values={pizza.toppings}
+                onSelect={(opt) => dispatch(toggleTopping(opt))}
+              />
+
+              <AccordionSection
+                title="OILS"
+                options={OPTIONS.oils}
+                mode="multi"
+                value={null}
+                values={pizza.oils}
+                onSelect={(opt) => dispatch(toggleOil(opt))}
+              />
+
+              <AccordionSection
+                title="HERBS"
+                options={OPTIONS.herbs}
+                mode="multi"
+                value={null}
+                values={pizza.herbs}
+                onSelect={(opt) => dispatch(toggleHerb(opt))}
+              />
+
+              <AccordionSection
+                title="DIPS"
+                options={OPTIONS.dips}
+                mode="multi"
+                value={null}
+                values={pizza.dips}
+                onSelect={(opt) => dispatch(toggleDip(opt))}
+              />
+
+              <div>
+                <h3>Notes</h3>
+                <textarea
+                  value={pizza.notes}
+                  onChange={(e) => dispatch(setNotes(e.target.value))}
+                />
+              </div>
+
+              <button onClick={() => dispatch(resetPizza())}>Reset</button>
+
+              <h3>Current config</h3>
+              <pre>{JSON.stringify(pizza, null, 2)}</pre>
+            </div>
           </>
         )}
       </div>
