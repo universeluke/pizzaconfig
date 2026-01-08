@@ -1,0 +1,17 @@
+.menu {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 260px;
+  height: "100vh";
+  background: black;
+  padding: 16;
+  color: white;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  color: white;
+}
