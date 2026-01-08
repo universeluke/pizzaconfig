@@ -1,0 +1,67 @@
+.section {
+  margin: 12px;
+}
+
+.header {
+  width: 100%;
+  border: none;
+  background: rgba(104, 157, 73);
+  color: rgb(243, 240, 230);
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.headerTitle {
+  font-size: 28px;
+  letter-spacing: 1px;
+  font-weight: 900;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  text-transform: uppercase;
+}
+
+.chevron {
+  font-size: 22px;
+  line-height: 1;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.option {
+  width: 100%;
+  border: none;
+  background: rgb(197, 222, 183);
+  padding: 14px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.optionText {
+  font-size: 28px;
+  font-weight: 900;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  text-transform: uppercase;
+  color: rgba(104, 157, 73);
+  letter-spacing: 0.5px;
+}
+
+.dot {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 4px solid rgba(104, 157, 73);
+  background: transparent;
+}
+
+.dotSelected {
+  background: rgba(104, 157, 73);
+}

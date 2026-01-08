@@ -1,4 +1,5 @@
 import { useState } from "react";
+import styles from "./AccordionSection.module.css";
 
 export default function AccordionSection(props: {
   title: string;
@@ -11,27 +12,37 @@ export default function AccordionSection(props: {
   const [open, setOpen] = useState(false);
 
   return (
-    <div>
-      <button onClick={() => setOpen(!open)}>
-        {props.title} {open ? "▲" : "▼"}
+    <div className={styles.section}>
+      <button className={styles.header} onClick={() => setOpen(!open)}>
+        <span className={styles.headerTitle}>{props.title}</span>
+        <span className={styles.chevron}>{open ? "▲" : "▼"}</span>
       </button>
 
-      {open &&
-        props.options.map((option) => {
-          const selected =
-            props.mode === "single"
-              ? props.value === option
-              : props.values.includes(option);
+      {open && (
+        <div className={styles.body}>
+          {props.options.map((option) => {
+            const selected =
+              props.mode === "single"
+                ? props.value === option
+                : props.values.includes(option);
 
-          return (
-            <div key={option}>
-              <button onClick={() => props.onSelect(option)}>
-                {selected ? "● " : "○ "}
-                {option}
+            return (
+              <button
+                key={option}
+                className={styles.option}
+                onClick={() => props.onSelect(option)}
+              >
+                <span className={styles.optionText}>{option}</span>
+                <span
+                  className={`${styles.dot} ${
+                    selected ? styles.dotSelected : ""
+                  }`}
+                />
               </button>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 }
