@@ -11,6 +11,16 @@ export default function AuthGate(props: { children: React.ReactNode }) {
       setUser(data.user ?? null);
       setLoading(false);
     });
+
+    //for listening to auth state change, reset user to nav away to /login
+    const { data: sub } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
+      setLoading(false);
+    });
+
+    return () => {
+      sub.subscription.unsubscribe();
+    };
   }, []);
 
   if (loading) return <div>loading...</div>;
