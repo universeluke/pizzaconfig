@@ -6,12 +6,34 @@
 }
 
 .base {
-  display: flex;
   position: relative;
-  width: 563px;
-  height: 563px;
-  background-color: rgb(255, 204, 143);
+  width: min(90vw, 70vh, 420px);
+  aspect-ratio: 1 /1;
+  background-color: rgb(238, 195, 142);
   border-radius: 50%;
-  align-items: center;
+  margin: 24px auto;
+  display: flex;
   justify-content: center;
+  align-items: center;
+}
+
+.layer {
+  position: absolute;
+  inset: 0;
+}
+
+.title {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 60px;
+  line-height: 0.9;
+  letter-spacing: 1px;
+  margin: 0;
+}
+
+.titleGreen {
+  color: rgba(104, 157, 73);
+}
+
+.titleRed {
+  color: rgba(157, 73, 73);
 }

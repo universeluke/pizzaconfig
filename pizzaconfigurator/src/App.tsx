@@ -1,9 +1,9 @@
-// import styles from "./App.module.css";
-// import Pepperoni from "./components/Pepperoni";
-// import Cheese from "./components/Cheese";
-// import Tomato from "./components/Tomato";
-// import Mushrooms from "./components/Mushrooms";
-// import Oregano from "./components/Oregano";
+import styles from "./App.module.css";
+import Pepperoni from "./components/Pepperoni";
+import Cheese from "./components/Cheese";
+import Tomato from "./components/Tomato";
+import Mushrooms from "./components/Mushrooms";
+import Oregano from "./components/Oregano";
 import { useState, useEffect } from "react";
 import { supabase } from "./supabaseClient";
 import { useDispatch, useSelector } from "react-redux";
@@ -104,23 +104,6 @@ function App() {
 
   return (
     <>
-      {/* <div className={styles.base}>
-        <div style={{ position: "absolute" }}>
-          <Tomato />
-        </div>
-        <div style={{ position: "absolute" }}>
-          <Cheese />
-        </div>
-        <div style={{ position: "absolute" }}>
-          <Pepperoni />
-        </div>
-        <div style={{ position: "absolute" }}>
-          <Mushrooms />
-        </div>
-        <div style={{ position: "absolute" }}>
-          <Oregano />
-        </div>
-      </div> */}
       <div>
         {!user && (
           <>
@@ -140,8 +123,32 @@ function App() {
         )}
         {user && (
           <>
-            <p>signed in as {user.email}</p>
-            <button onClick={placeOrder}>place test order</button>
+            <h2 className={styles.title}>
+              <span className={styles.titleGreen}>DESIGN</span>
+              <br />
+              <span className={styles.titleGreen}>YOUR</span>
+
+              <br />
+              <span className={styles.titleRed}>PIE</span>
+            </h2>
+            <div className={styles.base}>
+              <div className={styles.layer}>
+                <Tomato />
+              </div>
+              <div className={styles.layer}>
+                <Cheese />
+              </div>
+              <div className={styles.layer}>
+                <Pepperoni />
+              </div>
+              <div className={styles.layer}>
+                <Mushrooms />
+              </div>
+              <div className={styles.layer}>
+                <Oregano />
+              </div>
+            </div>
+            <button onClick={placeOrder}>place current order</button>
             <button onClick={loadOrders}>load my orders</button>
 
             <ul>
@@ -152,8 +159,6 @@ function App() {
               ))}
             </ul>
             <div>
-              <h2>Build your pizza</h2>
-
               <AccordionSection
                 title="SAUCE"
                 options={OPTIONS.sauce}
