@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styles from "./AccordionSection.module.css";
+import { customerTestIds } from "../test/customerTestIds";
 
 export default function AccordionSection(props: {
   title: string;
@@ -13,7 +14,11 @@ export default function AccordionSection(props: {
 
   return (
     <div className={styles.section}>
-      <button className={styles.header} onClick={() => setOpen(!open)}>
+      <button
+        data-testid={customerTestIds.category(props.title)}
+        className={styles.header}
+        onClick={() => setOpen(!open)}
+      >
         <span className={styles.headerTitle}>{props.title}</span>
         <span className={styles.chevron}>{open ? "▲" : "▼"}</span>
       </button>
@@ -31,6 +36,7 @@ export default function AccordionSection(props: {
                 key={option}
                 className={styles.option}
                 onClick={() => props.onSelect(option)}
+                data-testid={customerTestIds.option(option)}
               >
                 <span className={styles.optionText}>{option}</span>
                 <span
