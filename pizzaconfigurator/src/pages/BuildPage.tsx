@@ -4,7 +4,6 @@ import Cheese from "../components/Cheese";
 import Tomato from "../components/Tomato";
 import Mushrooms from "../components/Mushrooms";
 import Oregano from "../components/Oregano";
-import { useState, useEffect } from "react";
 import { supabase } from "../supabaseClient";
 import { useDispatch, useSelector } from "react-redux";
 import type { RootState } from "../store/store";
@@ -22,8 +21,6 @@ import {
 import BurgerMenu from "../components/BurgerMenu";
 
 function BuildPage() {
-  const [orders, setOrders] = useState<any[]>([]);
-
   const dispatch = useDispatch();
   const pizza = useSelector((state: RootState) => state.pizza);
 
@@ -45,6 +42,7 @@ function BuildPage() {
     const user = userData.user;
 
     if (!user) {
+      //TODO make into toast
       alert("not signed in");
       return;
     }
@@ -57,41 +55,9 @@ function BuildPage() {
     ]);
 
     if (error) alert(error.message);
+    //TODO make into toast
     else alert("order placed");
   }
-
-  async function loadOrders() {
-    const { data, error } = await supabase.from("orders").select("*");
-
-    if (error) {
-      alert(error.message);
-      return;
-    }
-
-    setOrders(data);
-  }
-
-  //adding a channel to subscribe to changes https://supabase.com/docs/reference/javascript/subscribe
-  useEffect(() => {
-    let channel: any;
-
-    supabase.auth.getUser().then(({ data }) => {
-      if (!data.user) return;
-
-      channel = supabase
-        .channel("my-orders")
-        .on(
-          "postgres_changes",
-          { event: "*", schema: "public", table: "orders" },
-          () => loadOrders()
-        )
-        .subscribe();
-    });
-
-    return () => {
-      if (channel) supabase.removeChannel(channel);
-    };
-  }, []);
 
   return (
     <>
@@ -124,15 +90,7 @@ function BuildPage() {
         </div>
       </div>
       <button onClick={placeOrder}>place current order</button>
-      <button onClick={loadOrders}>load my orders</button>
 
-      <ul>
-        {orders.map((order) => (
-          <li key={order.id}>
-            {order.id} - {order.status}
-          </li>
-        ))}
-      </ul>
       <div>
         <AccordionSection
           title="SAUCE"

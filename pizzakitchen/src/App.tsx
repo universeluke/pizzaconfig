@@ -22,6 +22,7 @@ export default function App() {
     });
 
     if (error) {
+      //TODO make into toast
       alert(error.message);
       return;
     }
@@ -40,6 +41,7 @@ export default function App() {
       "kitchen-list-orders"
     );
     if (error) {
+      //TODO make into toast
       alert(error.message);
       return;
     }
@@ -52,6 +54,7 @@ export default function App() {
     });
 
     if (error) {
+      //TODO make into toast
       alert(error.message);
       return;
     }

@@ -13,7 +13,7 @@ export default function BurgerMenu() {
           <button onClick={() => setOpen(false)}>X</button>
           <nav className={styles.nav}>
             <Link to="/" onClick={() => setOpen(false)}>
-              Design your pie
+              Home
             </Link>
             <Link to="/history" onClick={() => setOpen(false)}>
               Order history

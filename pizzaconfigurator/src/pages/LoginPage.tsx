@@ -12,6 +12,7 @@ export default function LoginPage() {
       email,
       password,
     });
+    //TODO make into toast
     if (error) return alert(error.message);
     nav("/"); // go to home after login
   }

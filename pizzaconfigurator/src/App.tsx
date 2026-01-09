@@ -20,7 +20,7 @@ export default function App() {
         }
       />
       <Route
-        path="/track"
+        path="/track/:orderId"
         element={
           <AuthGate>
             <TrackPage />
