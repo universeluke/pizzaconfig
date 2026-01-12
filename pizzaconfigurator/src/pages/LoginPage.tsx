@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../supabaseClient";
+import { customerTestIds } from "../test/customerTestIds";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -29,14 +30,18 @@ export default function LoginPage() {
         placeholder="email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
+        data-testid={customerTestIds.login.email}
       />
       <input
         placeholder="password"
         type="password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
+        data-testid={customerTestIds.login.password}
       />
-      <button type="submit">sign in</button>
+      <button type="submit" data-testid={customerTestIds.login.submit}>
+        sign in
+      </button>
     </form>
   );
 }
