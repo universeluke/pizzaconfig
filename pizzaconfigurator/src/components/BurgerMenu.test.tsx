@@ -1,4 +1,4 @@
-import { render } from "@testing-library/react";
+import { fireEvent, render, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, test, expect } from "vitest";
 import { MemoryRouter } from "react-router-dom";
@@ -28,7 +28,7 @@ describe("BurgerMenu", () => {
     expect(getByTestId(customerTestIds.burger.panel)).toBeInTheDocument();
   });
 
-  test("closes when clicking the close button", async () => {
+  test("closes when clicking the close button after animation ends", async () => {
     const user = userEvent.setup();
     const { getByTestId, queryByTestId } = render(
       <MemoryRouter>
@@ -40,6 +40,8 @@ describe("BurgerMenu", () => {
     expect(getByTestId(customerTestIds.burger.panel)).toBeInTheDocument();
 
     await user.click(getByTestId(customerTestIds.burger.closeButton));
+    fireEvent.animationEnd(getByTestId(customerTestIds.burger.panel));
+
     expect(queryByTestId(customerTestIds.burger.panel)).not.toBeInTheDocument();
   });
 
@@ -55,6 +57,8 @@ describe("BurgerMenu", () => {
     expect(getByTestId(customerTestIds.burger.panel)).toBeInTheDocument();
 
     await user.click(getByTestId(customerTestIds.burger.link("history")));
+    fireEvent.animationEnd(getByTestId(customerTestIds.burger.panel));
+
     expect(queryByTestId(customerTestIds.burger.panel)).not.toBeInTheDocument();
   });
 });

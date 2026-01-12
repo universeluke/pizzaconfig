@@ -19,10 +19,13 @@ import {
   toggleTopping,
 } from "../store/pizzaSlice";
 import BurgerMenu from "../components/BurgerMenu";
+import AddToBasket from "../components/AddToBasket";
+import { clearBasket } from "../store/basketSlice";
 
 function BuildPage() {
   const dispatch = useDispatch();
   const pizza = useSelector((state: RootState) => state.pizza);
+  const basket = useSelector((state: RootState) => state.basket);
 
   const OPTIONS = {
     sauce: ["tomato", "basil pesto", "white", "monthly special"],
@@ -33,16 +36,7 @@ function BuildPage() {
     dips: ["garlic mayo", "bbq"],
   };
 
-  function validatePizza(pizza: any) {
-    if (!pizza.sauce) return "Pick a sauce";
-    if (!pizza.cheese) return "Pick a cheese";
-    return null;
-  }
-
   async function placeOrder() {
-    const msg = validatePizza(pizza);
-    if (msg) return alert(msg);
-
     const { data: userData } = await supabase.auth.getUser();
     const user = userData.user;
 
@@ -52,16 +46,21 @@ function BuildPage() {
       return;
     }
 
-    const { error } = await supabase.from("orders").insert([
-      {
-        user_id: user.id,
-        pizza,
-      },
-    ]);
+    if (basket.items.length === 0) return alert("basket is empty");
+
+    const rows = basket.items.map((pizza) => ({
+      user_id: user.id,
+      pizza,
+    }));
+
+    const { error } = await supabase.from("orders").insert(rows);
 
     if (error) alert(error.message);
     //TODO make into toast
-    else alert("order placed");
+    else {
+      dispatch(clearBasket());
+      alert("order placed");
+    }
   }
 
   return (
@@ -93,6 +92,7 @@ function BuildPage() {
           <Oregano />
         </div>
       </div>
+      <AddToBasket />
       <button onClick={placeOrder}>place current order</button>
 
       <div>

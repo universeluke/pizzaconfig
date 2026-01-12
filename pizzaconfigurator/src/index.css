@@ -17,6 +17,10 @@
   --primary-red: rgba(157, 73, 73);
 }
 
+a {
+  text-decoration: inherit;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;

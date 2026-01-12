@@ -12,4 +12,7 @@ export const customerTestIds = {
         password: 'password-login-test-id',
         submit: 'submit-login-test-id'
     },
+    basket: {
+        addToBasketButton: 'add-to-basket-button-test-id'
+    }
 }
