@@ -5,8 +5,8 @@
 .header {
   width: 100%;
   border: none;
-  background: rgba(104, 157, 73);
-  color: rgb(243, 240, 230);
+  background: var(--primary-green);
+  color: var(--primary-beige);
   padding: 12px;
   display: flex;
   align-items: center;
@@ -50,7 +50,7 @@
   font-weight: 900;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   text-transform: uppercase;
-  color: rgba(104, 157, 73);
+  color: var(--primary-green);
   letter-spacing: 0.5px;
 }
 
@@ -58,10 +58,10 @@
   width: 18px;
   height: 18px;
   border-radius: 50%;
-  border: 4px solid rgba(104, 157, 73);
+  border: 4px solid var(--primary-green);
   background: transparent;
 }
 
 .dotSelected {
-  background: rgba(104, 157, 73);
+  background: var(--primary-green);
 }

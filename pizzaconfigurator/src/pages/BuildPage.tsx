@@ -33,10 +33,6 @@ function BuildPage() {
     dips: ["garlic mayo", "bbq"],
   };
 
-  async function logout() {
-    await supabase.auth.signOut();
-  }
-
   function validatePizza(pizza: any) {
     if (!pizza.sauce) return "Pick a sauce";
     if (!pizza.cheese) return "Pick a cheese";
@@ -72,7 +68,6 @@ function BuildPage() {
     <>
       <BurgerMenu />
 
-      <button onClick={logout}>logout</button>
       <h2 className={styles.title}>
         <span className={styles.titleGreen}>DESIGN</span>
         <br />

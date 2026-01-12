@@ -5,46 +5,77 @@ import { customerTestIds } from "../test/customerTestIds";
 
 export default function BurgerMenu() {
   const [open, setOpen] = useState(false);
+  const [closing, setClosing] = useState(false);
+
+  function openMenu() {
+    setOpen(true);
+    setClosing(false);
+  }
+
+  function closeMenu() {
+    setClosing(true);
+  }
+
+  function handleAnimationEnd() {
+    if (closing) {
+      setOpen(false);
+      setClosing(false);
+    }
+  }
 
   return (
     <div>
       <button
         data-testid={customerTestIds.burger.openButton}
-        onClick={() => setOpen(true)}
+        onClick={openMenu}
+        className={styles.openButton}
       >
-        OPEN
+        ≡
       </button>
       {open && (
-        <div data-testid={customerTestIds.burger.panel} className={styles.menu}>
-          <button
-            data-testid={customerTestIds.burger.closeButton}
-            onClick={() => setOpen(false)}
+        <div className={styles.overlay} onClick={closeMenu}>
+          <div
+            data-testid={customerTestIds.burger.panel}
+            className={`${styles.menu} ${
+              closing ? styles.closing : styles.open
+            }`}
+            onClick={(e) => e.stopPropagation()}
+            onAnimationEnd={handleAnimationEnd}
           >
-            X
-          </button>
-          <nav className={styles.nav}>
-            <Link
-              data-testid={customerTestIds.burger.link("home")}
-              to="/"
-              onClick={() => setOpen(false)}
+            <button
+              data-testid={customerTestIds.burger.closeButton}
+              onClick={closeMenu}
+              className={styles.closeButton}
             >
-              Home
-            </Link>
-            <Link
-              data-testid={customerTestIds.burger.link("history")}
-              to="/history"
-              onClick={() => setOpen(false)}
-            >
-              Order history
-            </Link>
-            <Link
-              data-testid={customerTestIds.burger.link("profile")}
-              to="/profile"
-              onClick={() => setOpen(false)}
-            >
-              Profile
-            </Link>
-          </nav>
+              X
+            </button>
+            <nav className={styles.nav}>
+              <Link
+                data-testid={customerTestIds.burger.link("home")}
+                to="/"
+                onClick={closeMenu}
+                className={styles.link}
+              >
+                HOME
+              </Link>
+              <Link
+                data-testid={customerTestIds.burger.link("history")}
+                to="/history"
+                onClick={closeMenu}
+                className={styles.link}
+              >
+                ORDER HISTORY{" "}
+              </Link>
+              <Link
+                data-testid={customerTestIds.burger.link("profile")}
+                to="/profile"
+                onClick={closeMenu}
+                className={styles.link}
+              >
+                PROFILE
+              </Link>
+            </nav>
+          </div>
         </div>
       )}
     </div>

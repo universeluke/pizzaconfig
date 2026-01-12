@@ -31,7 +31,7 @@
 }
 
 .titleGreen {
-  color: rgba(104, 157, 73);
+  color: var(--primary-green);
 }
 
 .titleRed {

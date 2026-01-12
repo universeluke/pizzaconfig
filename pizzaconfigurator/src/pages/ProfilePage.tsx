@@ -11,11 +11,16 @@ export default function ProfilePage() {
     });
   }, []);
 
+  async function logout() {
+    await supabase.auth.signOut();
+  }
+
   return (
     <div>
       <BurgerMenu />
       <h2>profile</h2>
       {email ? <div>email: {email}</div> : <div>not signed in</div>}
+      <button onClick={logout}>logout</button>
     </div>
   );
 }
