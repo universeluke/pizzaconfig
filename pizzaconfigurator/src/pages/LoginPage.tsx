@@ -7,7 +7,12 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const nav = useNavigate();
 
-  async function signIn() {
+  async function onSubmit(e: React.FormEvent) {
+    e.preventDefault();
+
+    if (!email.trim()) return alert("email is required");
+    if (!password) return alert("password is required");
+
     const { error } = await supabase.auth.signInWithPassword({
       email,
       password,
@@ -18,7 +23,7 @@ export default function LoginPage() {
   }
 
   return (
-    <div>
+    <form onSubmit={onSubmit}>
       <h2>Sign in</h2>
       <input
         placeholder="email"
@@ -31,7 +36,7 @@ export default function LoginPage() {
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
-      <button onClick={signIn}>sign in</button>
-    </div>
+      <button type="submit">sign in</button>
+    </form>
   );
 }

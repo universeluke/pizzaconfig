@@ -37,7 +37,16 @@ function BuildPage() {
     await supabase.auth.signOut();
   }
 
+  function validatePizza(pizza: any) {
+    if (!pizza.sauce) return "Pick a sauce";
+    if (!pizza.cheese) return "Pick a cheese";
+    return null;
+  }
+
   async function placeOrder() {
+    const msg = validatePizza(pizza);
+    if (msg) return alert(msg);
+
     const { data: userData } = await supabase.auth.getUser();
     const user = userData.user;
 
