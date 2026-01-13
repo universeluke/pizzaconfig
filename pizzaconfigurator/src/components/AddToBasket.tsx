@@ -3,6 +3,7 @@ import type { RootState } from "../store/store";
 import { addToBasket } from "../store/basketSlice";
 import { resetPizza } from "../store/pizzaSlice";
 import { customerTestIds } from "../test/customerTestIds";
+import styles from "./AddToBasket.module.css";
 
 export default function AddToBasket() {
   const dispatch = useDispatch();
@@ -23,6 +24,7 @@ export default function AddToBasket() {
 
   return (
     <button
+      className={styles.addButton}
       data-testid={customerTestIds.basket.addToBasketButton}
       onClick={addCurrentPizzaToBasket}
     >

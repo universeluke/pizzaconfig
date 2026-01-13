@@ -37,3 +37,23 @@
 .titleRed {
   color: rgba(157, 73, 73);
 }
+
+.notesSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 20px;
+}
+
+.notes {
+  color: var(--primary-green);
+  margin: 4px;
+}
+
+.notesInput {
+  border: 2px solid var(--primary-green);
+  border-radius: 3px;
+  margin: 0;
+  width: 80%;
+}

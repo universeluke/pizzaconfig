@@ -37,7 +37,6 @@ function BuildPage() {
   return (
     <>
       <BurgerMenu />
-      <AddToBasket />
       <Basket />
 
       <h2 className={styles.title}>
@@ -120,13 +119,15 @@ function BuildPage() {
           onSelect={(opt) => dispatch(toggleDip(opt))}
         />
 
-        <div>
-          <h3>Notes</h3>
+        <div className={styles.notesSection}>
+          <h3 className={styles.notes}>NOTES FOR KITCHEN</h3>
           <textarea
+            className={styles.notesInput}
             value={pizza.notes}
             onChange={(e) => dispatch(setNotes(e.target.value))}
           />
         </div>
+        <AddToBasket />
       </div>
     </>
   );
