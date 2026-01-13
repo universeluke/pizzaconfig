@@ -91,7 +91,7 @@ describe("AddToBasket", () => {
     const state = store.getState();
 
     expect(state.basket.items).toHaveLength(1);
-    expect(state.basket.items[0].sauce).toBe("tomato");
+    expect(state.basket.items[0].pizza.sauce).toBe("tomato");
 
     expect(state.pizza.sauce).toBeNull();
     expect(state.pizza.cheese).toBeNull();

@@ -5,6 +5,7 @@ import { clearBasket, removeFromBasket } from "../store/basketSlice";
 import { supabase } from "../supabaseClient";
 import styles from "./Basket.module.css";
 import BasketIcon from "../icons/BasketIcon";
+import { customerTestIds } from "../test/customerTestIds";
 
 export default function Basket() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -61,7 +62,11 @@ export default function Basket() {
   }
 
   return !isOpen ? (
-    <button className={styles.openButton} onClick={openMenu}>
+    <button
+      data-testid={customerTestIds.basket.openBasketButton}
+      className={styles.openButton}
+      onClick={openMenu}
+    >
       <BasketIcon />
     </button>
   ) : (
@@ -75,13 +80,16 @@ export default function Basket() {
           ×
         </button>
 
-        <h3 className={styles.title}>BASKET</h3>
+        <div className={styles.title}>
+          <BasketIcon />
+        </div>
 
         <div className={styles.list}>
           {basket.items.map((item) => (
             <div className={styles.item} key={item.id}>
               <span>{item.pizza.cheese}</span>
               <button
+                data-testid={customerTestIds.basket.removeItemButton(item.id)}
                 className={styles.removeButton}
                 onClick={() => dispatch(removeFromBasket(item.id))}
               >

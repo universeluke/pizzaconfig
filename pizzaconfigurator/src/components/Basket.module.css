@@ -43,10 +43,9 @@
   padding-right: 44px;
 }
 
-.title {
-  font-weight: 700;
-  letter-spacing: 1px;
-  margin: 0;
+.title svg {
+  width: 40px;
+  height: 40px;
 }
 
 .closeButton {
@@ -58,7 +57,7 @@
   color: var(--primary-beige);
   font-weight: 700;
   cursor: pointer;
-  font-size: 18px;
+  font-size: 30px;
 }
 
 .list {
