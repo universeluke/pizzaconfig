@@ -4,7 +4,6 @@ import Cheese from "../components/Cheese";
 import Tomato from "../components/Tomato";
 import Mushrooms from "../components/Mushrooms";
 import Oregano from "../components/Oregano";
-import { supabase } from "../supabaseClient";
 import { useDispatch, useSelector } from "react-redux";
 import type { RootState } from "../store/store";
 import AccordionSection from "../components/AccordionSection";
@@ -20,12 +19,11 @@ import {
 } from "../store/pizzaSlice";
 import BurgerMenu from "../components/BurgerMenu";
 import AddToBasket from "../components/AddToBasket";
-import { clearBasket } from "../store/basketSlice";
+import Basket from "../components/Basket";
 
 function BuildPage() {
   const dispatch = useDispatch();
   const pizza = useSelector((state: RootState) => state.pizza);
-  const basket = useSelector((state: RootState) => state.basket);
 
   const OPTIONS = {
     sauce: ["tomato", "basil pesto", "white", "monthly special"],
@@ -36,36 +34,11 @@ function BuildPage() {
     dips: ["garlic mayo", "bbq"],
   };
 
-  async function placeOrder() {
-    const { data: userData } = await supabase.auth.getUser();
-    const user = userData.user;
-
-    if (!user) {
-      //TODO make into toast
-      alert("not signed in");
-      return;
-    }
-
-    if (basket.items.length === 0) return alert("basket is empty");
-
-    const rows = basket.items.map((pizza) => ({
-      user_id: user.id,
-      pizza,
-    }));
-
-    const { error } = await supabase.from("orders").insert(rows);
-
-    if (error) alert(error.message);
-    //TODO make into toast
-    else {
-      dispatch(clearBasket());
-      alert("order placed");
-    }
-  }
-
   return (
     <>
       <BurgerMenu />
+      <AddToBasket />
+      <Basket />
 
       <h2 className={styles.title}>
         <span className={styles.titleGreen}>DESIGN</span>
@@ -92,9 +65,6 @@ function BuildPage() {
           <Oregano />
         </div>
       </div>
-      <AddToBasket />
-      <button onClick={placeOrder}>place current order</button>
-
       <div>
         <AccordionSection
           title="SAUCE"
@@ -157,11 +127,6 @@ function BuildPage() {
             onChange={(e) => dispatch(setNotes(e.target.value))}
           />
         </div>
-
-        <button onClick={() => dispatch(resetPizza())}>Reset</button>
-
-        <h3>Current config</h3>
-        <pre>{JSON.stringify(pizza, null, 2)}</pre>
       </div>
     </>
   );

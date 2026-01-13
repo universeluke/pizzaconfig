@@ -1,12 +1,17 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import type { PizzaConfig } from "./pizzaSlice";
 
+export type BasketItem = {
+    id: string;
+    pizza: PizzaConfig
+}
+
 export type BasketState = {
-  items: PizzaConfig[];
+    items: BasketItem[];
 };
 
 const initialState: BasketState = {
-  items: [],
+    items: [],
 };
 
 const basketSlice = createSlice({
@@ -14,7 +19,7 @@ const basketSlice = createSlice({
   initialState,
   reducers: {
     addToBasket(state, action: PayloadAction<PizzaConfig>) {
-      state.items.push(action.payload);
+      state.items.push({id: crypto.randomUUID(), pizza: action.payload});
     },
     removeFromBasket(state, action: PayloadAction<number>) {
       state.items.splice(action.payload, 1);

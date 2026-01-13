@@ -19,7 +19,7 @@
   position: fixed;
   top: 1rem;
   right: 1rem;
-  z-index: 99999;
+  z-index: 99;
   background-color: transparent;
   border: none;
   font-size: 2rem;
