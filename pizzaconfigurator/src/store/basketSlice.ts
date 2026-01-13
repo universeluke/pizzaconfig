@@ -21,8 +21,8 @@ const basketSlice = createSlice({
     addToBasket(state, action: PayloadAction<PizzaConfig>) {
       state.items.push({id: crypto.randomUUID(), pizza: action.payload});
     },
-    removeFromBasket(state, action: PayloadAction<number>) {
-      state.items.splice(action.payload, 1);
+    removeFromBasket(state, action: PayloadAction<string>) {
+      state.items = state.items.filter(item => item.id !== action.payload)
     },
     clearBasket() {
       return initialState;

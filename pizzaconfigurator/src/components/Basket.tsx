@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import type { RootState } from "../store/store";
 import { useState } from "react";
-import { clearBasket } from "../store/basketSlice";
+import { clearBasket, removeFromBasket } from "../store/basketSlice";
 import { supabase } from "../supabaseClient";
 import styles from "./Basket.module.css";
 import BasketIcon from "../icons/BasketIcon";
@@ -72,7 +72,7 @@ export default function Basket() {
         onAnimationEnd={handleAnimationEnd}
       >
         <button className={styles.closeButton} onClick={closeMenu}>
-          X
+          ×
         </button>
 
         <h3 className={styles.title}>BASKET</h3>
@@ -80,7 +80,13 @@ export default function Basket() {
         <div className={styles.list}>
           {basket.items.map((item) => (
             <div className={styles.item} key={item.id}>
-              {item.pizza.cheese}
+              <span>{item.pizza.cheese}</span>
+              <button
+                className={styles.removeButton}
+                onClick={() => dispatch(removeFromBasket(item.id))}
+              >
+                ×
+              </button>
             </div>
           ))}
         </div>

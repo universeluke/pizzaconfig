@@ -72,6 +72,19 @@
   background: rgba(240, 234, 211, 0.12);
   border-left: 2px solid rgba(240, 234, 211, 0.75);
   padding: 10px 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.removeButton {
+  background: transparent;
+  border: none;
+  color: var(--primary-beige);
+  font-size: 30px;
+  font-weight: 400;
+  cursor: pointer;
+  padding: 4px 8px;
 }
 
 .footer {

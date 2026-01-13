@@ -47,7 +47,7 @@ export default function BurgerMenu() {
               onClick={closeMenu}
               className={styles.closeButton}
             >
-              X
+              ×
             </button>
             <nav className={styles.nav}>
               <Link
