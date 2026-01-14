@@ -18,7 +18,7 @@
 }
 
 .ready {
-  background-color: rgb(242, 192, 106);
+  background-color: rgb(227, 176, 87);
 }
 
 .layer {
@@ -31,7 +31,7 @@
     background-color: rgb(238, 195, 142);
   }
   50% {
-    background-color: rgb(242, 192, 106);
+    background-color: rgb(227, 176, 87);
   }
   100% {
     background-color: rgb(242, 192, 106);
