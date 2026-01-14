@@ -1,0 +1,33 @@
+.svg {
+  width: 98%;
+  height: 98%;
+  display: block;
+}
+
+.tomato {
+  transition: fill 300ms ease, opacity 300ms ease;
+}
+
+.raw .tomato {
+  fill: #e97777;
+}
+
+.oven .tomato {
+  fill: #ec4848;
+}
+
+.ready .tomato {
+  fill: #ec4848;
+}
+
+@keyframes cooking {
+  0% {
+    fill: #e97777;
+  }
+  50% {
+    fill: #ec4848;
+  }
+  100% {
+    fill: #e97777;
+  }
+}

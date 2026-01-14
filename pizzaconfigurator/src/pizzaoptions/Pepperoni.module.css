@@ -1,0 +1,33 @@
+.svg {
+  width: 98%;
+  height: 98%;
+  display: block;
+}
+
+.pepperoni {
+  transition: fill 300ms ease, opacity 300ms ease;
+}
+
+.raw .pepperoni {
+  fill: #ff4343;
+}
+
+.oven .pepperoni {
+  fill: #c22525;
+}
+
+.ready .pepperoni {
+  fill: #c22525;
+}
+
+@keyframes cooking {
+  0% {
+    fill: #ff4343;
+  }
+  50% {
+    fill: #c22525;
+  }
+  100% {
+    fill: #ff4343;
+  }
+}

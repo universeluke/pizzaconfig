@@ -1,0 +1,53 @@
+.svg {
+  width: 98%;
+  height: 98%;
+  display: block;
+}
+
+.mushroomMed {
+  transition: fill 300ms ease, opacity 300ms ease;
+}
+
+.raw .mushroomMed {
+  fill: #b6975aff;
+}
+
+.oven .mushroomMed {
+  fill: rgb(133, 110, 65);
+}
+
+.ready .mushroomMed {
+  fill: rgb(133, 110, 65);
+}
+
+.mushroomLight {
+  transition: fill 300ms ease, opacity 300ms ease;
+}
+
+.raw .mushroomLight {
+  fill: #ceb37fff;
+}
+
+.oven .mushroomLight {
+  fill: rgb(170, 147, 105);
+}
+
+.ready .mushroomLight {
+  fill: rgb(170, 147, 105);
+}
+
+.mushroomDark {
+  transition: fill 300ms ease, opacity 300ms ease;
+}
+
+.raw .mushroomDark {
+  fill: #a48b59ff;
+}
+
+.oven .mushroomDark {
+  fill: rgb(86, 73, 47);
+}
+
+.ready .mushroomDark {
+  fill: rgb(86, 73, 47);
+}

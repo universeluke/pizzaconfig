@@ -1,0 +1,21 @@
+.svg {
+  width: 98%;
+  height: 98%;
+  display: block;
+}
+
+.oregano {
+  transition: fill 300ms ease, opacity 300ms ease;
+}
+
+.raw .oregano {
+  fill: #689d49;
+}
+
+.oven .oregano {
+  fill: #587249;
+}
+
+.ready .oregano {
+  fill: #587249;
+}

@@ -1,0 +1,28 @@
+.base {
+  position: relative;
+  width: min(90vw, 70vh, 420px);
+  aspect-ratio: 1 /1;
+  border-radius: 50%;
+  margin: 24px auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 200ms ease;
+}
+
+.raw {
+  background-color: rgb(238, 195, 142);
+}
+
+.oven {
+  background-color: rgb(242, 192, 106);
+}
+
+.ready {
+  background-color: rgb(242, 192, 106);
+}
+
+.layer {
+  position: absolute;
+  inset: 0;
+}

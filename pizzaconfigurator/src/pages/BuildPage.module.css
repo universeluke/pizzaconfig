@@ -5,18 +5,6 @@
   text-align: center;
 }
 
-.base {
-  position: relative;
-  width: min(90vw, 70vh, 420px);
-  aspect-ratio: 1 /1;
-  background-color: rgb(238, 195, 142);
-  border-radius: 50%;
-  margin: 24px auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .layer {
   position: absolute;
   inset: 0;

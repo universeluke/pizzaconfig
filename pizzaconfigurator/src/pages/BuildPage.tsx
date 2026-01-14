@@ -1,14 +1,8 @@
 import styles from "./BuildPage.module.css";
-import Pepperoni from "../components/Pepperoni";
-import Cheese from "../components/Cheese";
-import Tomato from "../components/Tomato";
-import Mushrooms from "../components/Mushrooms";
-import Oregano from "../components/Oregano";
 import { useDispatch, useSelector } from "react-redux";
 import type { RootState } from "../store/store";
 import AccordionSection from "../components/AccordionSection";
 import {
-  resetPizza,
   setCheese,
   setNotes,
   setSauce,
@@ -20,6 +14,7 @@ import {
 import BurgerMenu from "../components/BurgerMenu";
 import AddToBasket from "../components/AddToBasket";
 import Basket from "../components/Basket";
+import PizzaVisualizer from "../components/PizzaVisualiser";
 
 function BuildPage() {
   const dispatch = useDispatch();
@@ -47,23 +42,9 @@ function BuildPage() {
         <br />
         <span className={styles.titleRed}>PIE</span>
       </h2>
-      <div className={styles.base}>
-        <div className={styles.layer}>
-          <Tomato />
-        </div>
-        <div className={styles.layer}>
-          <Cheese />
-        </div>
-        <div className={styles.layer}>
-          <Pepperoni />
-        </div>
-        <div className={styles.layer}>
-          <Mushrooms />
-        </div>
-        <div className={styles.layer}>
-          <Oregano />
-        </div>
-      </div>
+
+      <PizzaVisualizer pizza={pizza} />
+
       <div>
         <AccordionSection
           title="SAUCE"

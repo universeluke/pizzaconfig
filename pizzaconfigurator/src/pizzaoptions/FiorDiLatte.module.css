@@ -1,0 +1,21 @@
+.svg {
+  width: 98%;
+  height: 98%;
+  display: block;
+}
+
+.fiordilatte {
+  transition: fill 300ms ease, opacity 300ms ease;
+}
+
+.raw .fiordilatte {
+  fill: #ffeda2;
+}
+
+.oven .fiordilatte {
+  fill: #ffe57e;
+}
+
+.ready .fiordilatte {
+  fill: #ffe57e;
+}
