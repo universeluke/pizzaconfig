@@ -13,9 +13,21 @@
 }
 
 .oven .oregano {
-  fill: #587249;
+  animation: cooking 3s infinite ease-in-out;
 }
 
 .ready .oregano {
   fill: #587249;
+}
+
+@keyframes cooking {
+  0% {
+    fill: #689d49;
+  }
+  50% {
+    fill: #587249;
+  }
+  100% {
+    fill: #689d49;
+  }
 }

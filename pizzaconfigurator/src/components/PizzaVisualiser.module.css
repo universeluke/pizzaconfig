@@ -7,7 +7,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: background-color 200ms ease;
 }
 
 .raw {
@@ -15,7 +14,7 @@
 }
 
 .oven {
-  background-color: rgb(242, 192, 106);
+  animation: cooking 3s infinite ease-in-out;
 }
 
 .ready {
@@ -25,4 +24,16 @@
 .layer {
   position: absolute;
   inset: 0;
+}
+
+@keyframes cooking {
+  0% {
+    background-color: rgb(238, 195, 142);
+  }
+  50% {
+    background-color: rgb(242, 192, 106);
+  }
+  100% {
+    background-color: rgb(242, 192, 106);
+  }
 }

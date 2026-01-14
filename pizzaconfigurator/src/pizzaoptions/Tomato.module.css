@@ -13,7 +13,7 @@
 }
 
 .oven .tomato {
-  fill: #ec4848;
+  animation: cooking 3s infinite ease-in-out;
 }
 
 .ready .tomato {

@@ -13,7 +13,7 @@
 }
 
 .oven .pepperoni {
-  fill: #c22525;
+  animation: cooking 3s infinite ease-in-out;
 }
 
 .ready .pepperoni {

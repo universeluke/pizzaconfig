@@ -13,9 +13,21 @@
 }
 
 .oven .fiordilatte {
-  fill: #ffe57e;
+  animation: cooking 3s infinite ease-in-out;
 }
 
 .ready .fiordilatte {
   fill: #ffe57e;
+}
+
+@keyframes cooking {
+  0% {
+    fill: #ffeda2;
+  }
+  50% {
+    fill: #ffe57e;
+  }
+  100% {
+    fill: #ffeda2;
+  }
 }
