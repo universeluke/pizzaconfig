@@ -1,12 +1,13 @@
 import { useDispatch, useSelector } from "react-redux";
 import type { RootState } from "../store/store";
 import { useState } from "react";
-import { clearBasket, removeFromBasket } from "../store/basketSlice";
+import { clearBasket } from "../store/basketSlice";
 import { supabase } from "../supabaseClient";
 import styles from "./Basket.module.css";
 import BasketIcon from "../icons/BasketIcon";
 import { customerTestIds } from "../test/customerTestIds";
 import { placeOrder } from "../utils/placeOrder";
+import BasketItems from "./BasketItems";
 
 export default function Basket() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -74,20 +75,7 @@ export default function Basket() {
           <BasketIcon />
         </div>
 
-        <div className={styles.list}>
-          {basket.items.map((item) => (
-            <div className={styles.item} key={item.id}>
-              <span>{item.pizza.cheese}</span>
-              <button
-                data-testid={customerTestIds.basket.removeItemButton(item.id)}
-                className={styles.removeButton}
-                onClick={() => dispatch(removeFromBasket(item.id))}
-              >
-                ×
-              </button>
-            </div>
-          ))}
-        </div>
+        <BasketItems />
 
         <div className={styles.footer}>
           <button

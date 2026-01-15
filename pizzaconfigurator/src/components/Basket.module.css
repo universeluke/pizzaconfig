@@ -34,6 +34,7 @@
   color: var(--primary-beige);
   padding: 16px;
   box-sizing: border-box;
+  overflow: scroll;
 }
 
 .header {
@@ -60,40 +61,11 @@
   font-size: 30px;
 }
 
-.list {
-  margin-top: 3rem;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.item {
-  background: rgba(240, 234, 211, 0.12);
-  border-left: 2px solid rgba(240, 234, 211, 0.75);
-  padding: 10px 12px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.removeButton {
-  background: transparent;
-  border: none;
-  color: var(--primary-beige);
-  font-size: 30px;
-  font-weight: 400;
-  cursor: pointer;
-  padding: 4px 8px;
-}
-
 .footer {
-  position: absolute;
-  left: 16px;
-  right: 16px;
-  bottom: 16px;
   display: flex;
   flex-direction: column;
   gap: 10px;
+  padding-top: 10px;
 }
 
 .placeOrderButton {

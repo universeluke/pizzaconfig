@@ -17,5 +17,8 @@ export const customerTestIds = {
         openBasketButton: 'open-basket-button-test-id',
         removeItemButton: (item: string) => `remove-item-${item}-button-test-id`,
         placeOrderButton: 'place-order-button-test-id',
+    },
+    basketItems: {
+        itemsList: 'basket-items-list-test-id'
     }
 }

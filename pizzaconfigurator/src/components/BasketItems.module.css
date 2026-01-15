@@ -1,0 +1,31 @@
+.list {
+  margin-top: 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.item {
+  background: rgba(240, 234, 211, 0.12);
+  border-left: 2px solid rgba(240, 234, 211, 0.75);
+  padding: 10px 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.removeButton {
+  background: transparent;
+  border: none;
+  color: var(--primary-beige);
+  font-size: 30px;
+  font-weight: 400;
+  cursor: pointer;
+  padding: 4px 8px;
+}
+
+.optionsList {
+  display: flex;
+  flex-direction: column;
+  width: 150px;
+}

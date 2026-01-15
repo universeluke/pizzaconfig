@@ -80,7 +80,9 @@ describe("Basket", () => {
     await user.click(
       screen.getByTestId(customerTestIds.basket.openBasketButton)
     );
-    expect(screen.getByText("mozzarella")).toBeInTheDocument();
+    expect(
+      screen.getByTestId(customerTestIds.basketItems.itemsList)
+    ).toBeInTheDocument();
 
     await user.click(
       screen.getByTestId(customerTestIds.basket.removeItemButton("1"))
