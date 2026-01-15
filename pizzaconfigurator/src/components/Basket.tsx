@@ -6,6 +6,7 @@ import { supabase } from "../supabaseClient";
 import styles from "./Basket.module.css";
 import BasketIcon from "../icons/BasketIcon";
 import { customerTestIds } from "../test/customerTestIds";
+import { placeOrder } from "../utils/placeOrder";
 
 export default function Basket() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -29,32 +30,21 @@ export default function Basket() {
     }
   }
 
-  async function placeOrder() {
-    const { data: userData } = await supabase.auth.getUser();
-    const user = userData.user;
+  async function handlePlaceOrder() {
+    const { data } = await supabase.auth.getUser();
+    console.log(data);
+    const userId = data.user?.id ?? "";
 
-    if (!user) {
-      //TODO make into toast
-      alert("not signed in");
+    const result = await placeOrder(supabase, userId, basket.items);
+
+    if (!result.ok) {
+      alert(result.message);
       return;
     }
 
-    if (basket.items.length === 0) return alert("basket is empty");
-
-    const rows = basket.items.map((item) => ({
-      user_id: user.id,
-      pizza: item.pizza,
-    }));
-
-    const { error } = await supabase.from("orders").insert(rows);
-
-    if (error) alert(error.message);
-    //TODO make into toast
-    else {
-      dispatch(clearBasket());
-      setIsOpen(false);
-      alert("order placed");
-    }
+    dispatch(clearBasket());
+    setIsOpen(false);
+    alert("order placed");
   }
 
   if (basket.items.length === 0) {
@@ -100,7 +90,11 @@ export default function Basket() {
         </div>
 
         <div className={styles.footer}>
-          <button className={styles.placeOrderButton} onClick={placeOrder}>
+          <button
+            className={styles.placeOrderButton}
+            onClick={handlePlaceOrder}
+            data-testid={customerTestIds.basket.placeOrderButton}
+          >
             PLACE ORDER
           </button>
         </div>
