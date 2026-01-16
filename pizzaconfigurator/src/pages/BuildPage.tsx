@@ -21,7 +21,7 @@ function BuildPage() {
   const pizza = useSelector((state: RootState) => state.pizza);
 
   const OPTIONS = {
-    sauce: ["tomato", "basil pesto", "white", "monthly special"],
+    sauce: ["tomato", "pesto", "white", "bbq"],
     cheese: ["fior di latte", "mozzarella", "vegan", "none"],
     toppings: ["pepperoni", "mushroom", "onion", "ham"],
     oils: ["olive oil", "chilli oil"],

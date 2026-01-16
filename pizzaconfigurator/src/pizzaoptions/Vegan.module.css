@@ -1,0 +1,33 @@
+.svg {
+  width: 104%;
+  height: 107%;
+  display: block;
+}
+
+.vegan {
+  transition: fill 300ms ease, opacity 300ms ease;
+}
+
+.raw .vegan {
+  fill: #ffeda2;
+}
+
+.oven .vegan {
+  animation: cooking 3s infinite ease-in-out;
+}
+
+.ready .vegan {
+  fill: #ffe57e;
+}
+
+@keyframes cooking {
+  0% {
+    fill: #ffeda2;
+  }
+  50% {
+    fill: #ffe57e;
+  }
+  100% {
+    fill: #ffeda2;
+  }
+}

@@ -1,0 +1,33 @@
+.svg {
+  width: 98%;
+  height: 98%;
+  display: block;
+}
+
+.white {
+  transition: fill 300ms ease, opacity 300ms ease;
+}
+
+.raw .white {
+  fill: #ededd4;
+}
+
+.oven .white {
+  animation: cooking 3s infinite ease-in-out;
+}
+
+.ready .white {
+  fill: #e9e9c0;
+}
+
+@keyframes cooking {
+  0% {
+    fill: #ededd4;
+  }
+  50% {
+    fill: #e9e9c0;
+  }
+  100% {
+    fill: #ededd4;
+  }
+}

@@ -1,0 +1,33 @@
+.svg {
+  width: 98%;
+  height: 98%;
+  display: block;
+}
+
+.pesto {
+  transition: fill 300ms ease, opacity 300ms ease;
+}
+
+.raw .pesto {
+  fill: #8bb97a;
+}
+
+.oven .pesto {
+  animation: cooking 3s infinite ease-in-out;
+}
+
+.ready .pesto {
+  fill: #6a965a;
+}
+
+@keyframes cooking {
+  0% {
+    fill: #8bb97a;
+  }
+  50% {
+    fill: #6a965a;
+  }
+  100% {
+    fill: #8bb97a;
+  }
+}

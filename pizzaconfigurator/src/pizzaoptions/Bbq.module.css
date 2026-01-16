@@ -1,0 +1,33 @@
+.svg {
+  width: 98%;
+  height: 98%;
+  display: block;
+}
+
+.bbq {
+  transition: fill 300ms ease, opacity 300ms ease;
+}
+
+.raw .bbq {
+  fill: #7a4e29;
+}
+
+.oven .bbq {
+  animation: cooking 3s infinite ease-in-out;
+}
+
+.ready .bbq {
+  fill: #7a4e29;
+}
+
+@keyframes cooking {
+  0% {
+    fill: #7a4e29;
+  }
+  50% {
+    fill: #4c2e16;
+  }
+  100% {
+    fill: #7a4e29;
+  }
+}

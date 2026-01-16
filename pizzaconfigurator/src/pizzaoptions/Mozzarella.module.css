@@ -1,0 +1,33 @@
+.svg {
+  width: 98%;
+  height: 98%;
+  display: block;
+}
+
+.mozzarella {
+  transition: fill 300ms ease, opacity 300ms ease;
+}
+
+.raw .mozzarella {
+  fill: #fff8da;
+}
+
+.oven .mozzarella {
+  animation: cooking 3s infinite ease-in-out;
+}
+
+.ready .mozzarella {
+  fill: #faecaf;
+}
+
+@keyframes cooking {
+  0% {
+    fill: #fff8da;
+  }
+  50% {
+    fill: #faecaf;
+  }
+  100% {
+    fill: #fff8da;
+  }
+}
