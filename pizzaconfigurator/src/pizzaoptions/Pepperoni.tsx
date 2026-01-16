@@ -1,5 +1,6 @@
 import styles from "./Pepperoni.module.css";
 import type { CookStage } from "../components/PizzaVisualiser";
+import { customerTestIds } from "../test/customerTestIds";
 
 type Props = { cookStage: CookStage };
 
@@ -10,6 +11,7 @@ export default function Pepperoni({ cookStage }: Props) {
       viewBox="0 0 512 512"
       preserveAspectRatio="xMidYMid meet"
       className={`${styles.svg} ${styles[cookStage]}`}
+      data-testid={customerTestIds.pizzaOption("pepperoni")}
     >
       <path
         d="M0 0 C8.92170116 5.56804011 14.21591239 12.26457462 18 22 C18.35707031 22.80050781 18.71414063 23.60101563 19.08203125 24.42578125 C21.95290044 32.47643144 20.11686078 40.59479934 16.60546875 48.109375 C10.60851584 58.90680847 3.01655793 65.46007314 -8.875 68.9375 C-19.65820216 71.26301728 -28.798136 69.42361684 -38.0859375 63.71875 C-47.83558552 56.99485481 -52.5622885 48.48789791 -55 37 C-56.497487 25.87310294 -51.93955284 16.79346006 -45.875 7.875 C-34.68238104 -4.84550028 -14.67589298 -8.52574358 0 0 Z "

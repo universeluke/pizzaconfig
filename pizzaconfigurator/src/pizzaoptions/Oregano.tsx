@@ -1,5 +1,6 @@
 import styles from "./Oregano.module.css";
 import type { CookStage } from "../components/PizzaVisualiser";
+import { customerTestIds } from "../test/customerTestIds";
 
 type Props = { cookStage: CookStage };
 
@@ -10,6 +11,7 @@ export default function Oregano({ cookStage }: Props) {
       viewBox="0 0 512 512"
       preserveAspectRatio="xMidYMid meet"
       className={`${styles.svg} ${styles[cookStage]}`}
+      data-testid={customerTestIds.pizzaOption("oregano")}
     >
       <path
         d="M0 0 C2.3125 0.0625 2.3125 0.0625 5 1 C6.03485877 3.31808364 7.0355414 5.65175298 8 8 C9.83700789 8.77242269 9.83700789 8.77242269 12 9 C17.70629371 12.24475524 17.70629371 12.24475524 18.875 15.25 C18.91625 15.8275 18.9575 16.405 19 17 C17.02 17.99 17.02 17.99 15 19 C14.113125 18.34 13.22625 17.68 12.3125 17 C9.26118508 14.7534293 9.26118508 14.7534293 6.3125 15.0625 C5.549375 15.041875 4.78625 15.02125 4 15 C2.3125 12.8125 2.3125 12.8125 1 10 C0.5875 9.175 0.175 8.35 -0.25 7.5 C-1.12056185 4.59812715 -0.82318997 2.88116489 0 0 Z "
