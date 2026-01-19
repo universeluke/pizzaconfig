@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { supabase } from "../supabaseClient";
 import BurgerMenu from "../components/BurgerMenu";
+import PizzaVisualiser from "../components/PizzaVisualiser";
 
 export default function TrackPage() {
   const { orderId } = useParams();
@@ -39,7 +40,7 @@ export default function TrackPage() {
           table: "orders",
           filter: `id=eq.${orderId}`,
         },
-        () => load()
+        () => load(),
       )
       .subscribe();
 
@@ -51,14 +52,35 @@ export default function TrackPage() {
   return (
     <div>
       <BurgerMenu />
-      <h2>track order</h2>
-
+      <h2>TRACK ORDER</h2>
       {!order ? (
         <div>loading...</div>
       ) : (
         <>
-          <div>order: {order.id}</div>
-          <div>status: {order.status}</div>
+          {order.status === "todo" && (
+            <>
+              <div>YOUR ORDER IS IN THE QUEUE</div>
+            </>
+          )}
+          {order.status === "in_progress" && (
+            <>
+              <div>YOUR ORDER IS BEING MADE</div>
+              <PizzaVisualiser pizza={order.pizza} cookStage="making" />
+            </>
+          )}
+          {order.status === "cooking" && (
+            <>
+              <div>YOUR ORDER IS IN THE OVEN</div>
+              <PizzaVisualiser pizza={order.pizza} cookStage="oven" />
+            </>
+          )}
+          {order.status === "done" && (
+            <>
+              <div>YOUR ORDER IS READY FOR COLLECTION!</div>
+
+              <PizzaVisualiser pizza={order.pizza} cookStage="ready" />
+            </>
+          )}
         </>
       )}
     </div>

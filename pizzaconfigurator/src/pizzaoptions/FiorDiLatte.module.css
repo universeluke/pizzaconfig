@@ -5,10 +5,16 @@
 }
 
 .fiordilatte {
-  transition: fill 300ms ease, opacity 300ms ease;
+  transition:
+    fill 300ms ease,
+    opacity 300ms ease;
 }
 
 .raw .fiordilatte {
+  fill: #ffeda2;
+}
+
+.making .fiordilatte {
   fill: #ffeda2;
 }
 

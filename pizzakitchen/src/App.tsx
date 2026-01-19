@@ -4,7 +4,7 @@ import Column from "./components/Column";
 
 type Order = {
   id: string;
-  status: "todo" | "in_progress" | "done" | "collected";
+  status: "todo" | "in_progress" | "cooking" | "done" | "collected";
   pizza: any;
 };
 
@@ -38,7 +38,7 @@ export default function App() {
 
   async function loadOrders() {
     const { data, error } = await supabase.functions.invoke(
-      "kitchen-list-orders"
+      "kitchen-list-orders",
     );
     if (error) {
       //TODO make into toast
@@ -77,7 +77,7 @@ export default function App() {
         { event: "*", schema: "public", table: "orders" },
         () => {
           loadOrders();
-        }
+        },
       )
       .subscribe();
 
@@ -110,6 +110,8 @@ export default function App() {
 
   const inProgress = orders.filter((order) => order.status === "in_progress");
 
+  const cooking = orders.filter((order) => order.status === "cooking");
+
   const done = orders.filter((order) => order.status === "done");
 
   const collected = orders.filter((order) => order.status === "collected");
@@ -129,12 +131,18 @@ export default function App() {
         title="In progress"
         orders={inProgress}
         onPrev={(id) => updateStatus(id, "todo")}
+        onNext={(id) => updateStatus(id, "cooking")}
+      />
+      <Column
+        title="Cooking"
+        orders={cooking}
+        onPrev={(id) => updateStatus(id, "in_progress")}
         onNext={(id) => updateStatus(id, "done")}
       />
       <Column
         title="Done"
         orders={done}
-        onPrev={(id) => updateStatus(id, "in_progress")}
+        onPrev={(id) => updateStatus(id, "cooking")}
         onNext={(id) => updateStatus(id, "collected")}
       />
       <Column

@@ -5,10 +5,16 @@
 }
 
 .vegan {
-  transition: fill 300ms ease, opacity 300ms ease;
+  transition:
+    fill 300ms ease,
+    opacity 300ms ease;
 }
 
 .raw .vegan {
+  fill: #ffeda2;
+}
+
+.making .vegan {
   fill: #ffeda2;
 }
 

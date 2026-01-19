@@ -5,10 +5,16 @@
 }
 
 .white {
-  transition: fill 300ms ease, opacity 300ms ease;
+  transition:
+    fill 300ms ease,
+    opacity 300ms ease;
 }
 
 .raw .white {
+  fill: #ededd4;
+}
+
+.making .white {
   fill: #ededd4;
 }
 

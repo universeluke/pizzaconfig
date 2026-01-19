@@ -5,10 +5,16 @@
 }
 
 .mozzarella {
-  transition: fill 300ms ease, opacity 300ms ease;
+  transition:
+    fill 300ms ease,
+    opacity 300ms ease;
 }
 
 .raw .mozzarella {
+  fill: #fff8da;
+}
+
+.making .mozzarella {
   fill: #fff8da;
 }
 

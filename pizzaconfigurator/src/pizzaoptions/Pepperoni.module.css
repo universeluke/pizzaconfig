@@ -5,10 +5,16 @@
 }
 
 .pepperoni {
-  transition: fill 300ms ease, opacity 300ms ease;
+  transition:
+    fill 300ms ease,
+    opacity 300ms ease;
 }
 
 .raw .pepperoni {
+  fill: #ff4343;
+}
+
+.making .pepperoni {
   fill: #ff4343;
 }
 

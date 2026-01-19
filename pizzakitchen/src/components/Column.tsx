@@ -1,6 +1,6 @@
 type Order = {
   id: string;
-  status: "todo" | "in_progress" | "done";
+  status: "todo" | "in_progress" | "cooking" | "done" | "collected";
   pizza: any;
 };
 

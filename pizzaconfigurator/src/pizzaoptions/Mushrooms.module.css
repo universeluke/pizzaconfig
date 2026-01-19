@@ -5,10 +5,16 @@
 }
 
 .mushroomMed {
-  transition: fill 300ms ease, opacity 300ms ease;
+  transition:
+    fill 300ms ease,
+    opacity 300ms ease;
 }
 
 .raw .mushroomMed {
+  fill: #b6975aff;
+}
+
+.making .mushroomMed {
   fill: #b6975aff;
 }
 
@@ -21,10 +27,16 @@
 }
 
 .mushroomLight {
-  transition: fill 300ms ease, opacity 300ms ease;
+  transition:
+    fill 300ms ease,
+    opacity 300ms ease;
 }
 
 .raw .mushroomLight {
+  fill: #ceb37fff;
+}
+
+.making .mushroomLight {
   fill: #ceb37fff;
 }
 
@@ -37,10 +49,16 @@
 }
 
 .mushroomDark {
-  transition: fill 300ms ease, opacity 300ms ease;
+  transition:
+    fill 300ms ease,
+    opacity 300ms ease;
 }
 
 .raw .mushroomDark {
+  fill: #a48b59ff;
+}
+
+.making .mushroomDark {
   fill: #a48b59ff;
 }
 

@@ -5,10 +5,16 @@
 }
 
 .pesto {
-  transition: fill 300ms ease, opacity 300ms ease;
+  transition:
+    fill 300ms ease,
+    opacity 300ms ease;
 }
 
 .raw .pesto {
+  fill: #8bb97a;
+}
+
+.making .pesto {
   fill: #8bb97a;
 }
 

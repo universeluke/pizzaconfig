@@ -5,10 +5,16 @@
 }
 
 .tomato {
-  transition: fill 300ms ease, opacity 300ms ease;
+  transition:
+    fill 300ms ease,
+    opacity 300ms ease;
 }
 
 .raw .tomato {
+  fill: #e97777;
+}
+
+.making .tomato {
   fill: #e97777;
 }
 

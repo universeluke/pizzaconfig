@@ -5,10 +5,16 @@
 }
 
 .bbq {
-  transition: fill 300ms ease, opacity 300ms ease;
+  transition:
+    fill 300ms ease,
+    opacity 300ms ease;
 }
 
 .raw .bbq {
+  fill: #7a4e29;
+}
+
+.making .bbq {
   fill: #7a4e29;
 }
 
