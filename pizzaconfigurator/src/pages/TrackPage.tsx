@@ -4,6 +4,7 @@ import { supabase } from "../supabaseClient";
 import BurgerMenu from "../components/BurgerMenu";
 import PizzaVisualiser from "../components/PizzaVisualiser";
 import styles from "./TrackPage.module.css";
+import { customerTestIds } from "../test/customerTestIds";
 
 export default function TrackPage() {
   const { orderId } = useParams();
@@ -67,27 +68,62 @@ export default function TrackPage() {
         <>
           {order.status === "todo" && (
             <div className={styles.trackContainer}>
-              <h3 className={styles.orderMessage}>YOUR PIE IS IN THE QUEUE</h3>
+              <h3
+                data-testid={customerTestIds.tracking.trackingMessage("todo")}
+                className={styles.orderMessage}
+              >
+                YOUR PIE IS IN THE QUEUE
+              </h3>
             </div>
           )}
           {order.status === "in_progress" && (
             <div className={styles.trackContainer}>
               <PizzaVisualiser pizza={order.pizza} cookStage="making" />
-              <h3 className={styles.orderMessage}>YOUR PIE IS BEING MADE</h3>
+              <h3
+                data-testid={customerTestIds.tracking.trackingMessage(
+                  "in_progress",
+                )}
+                className={styles.orderMessage}
+              >
+                YOUR PIE IS BEING MADE
+              </h3>
             </div>
           )}
           {order.status === "cooking" && (
             <div className={styles.trackContainer}>
               <PizzaVisualiser pizza={order.pizza} cookStage="oven" />
-              <h3 className={styles.orderMessage}>YOUR PIE IS IN THE OVEN</h3>
+              <h3
+                data-testid={customerTestIds.tracking.trackingMessage(
+                  "cooking",
+                )}
+                className={styles.orderMessage}
+              >
+                YOUR PIE IS IN THE OVEN
+              </h3>
             </div>
           )}
           {order.status === "done" && (
             <div className={styles.trackContainer}>
               <PizzaVisualiser pizza={order.pizza} cookStage="ready" />
-              <h3 className={styles.orderMessage}>
+              <h3
+                data-testid={customerTestIds.tracking.trackingMessage("done")}
+                className={styles.orderMessage}
+              >
                 YOUR PIE IS READY FOR COLLECTION!
               </h3>
+            </div>
+          )}
+          {order.status === "collected" && (
+            <div className={styles.trackContainer}>
+              <h3
+                data-testid={customerTestIds.tracking.trackingMessage(
+                  "collected",
+                )}
+                className={styles.orderMessage}
+              >
+                YOU HAVE COLLECTED YOUR PIE
+              </h3>
+              <h3 className={styles.orderMessage}>ENJOY!</h3>
             </div>
           )}
         </>

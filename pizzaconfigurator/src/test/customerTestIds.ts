@@ -21,5 +21,8 @@ export const customerTestIds = {
     basketItems: {
         itemsList: 'basket-items-list-test-id'
     },
-    pizzaOption: (option:string) => `pizza-option-${option}-test-id`
+    pizzaOption: (option:string) => `pizza-option-${option}-test-id`,
+    tracking: {
+        trackingMessage: (stage) => `${stage}-tracking-message-test-id`
+    }
 }
