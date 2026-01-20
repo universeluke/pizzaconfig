@@ -50,7 +50,7 @@ export default function PizzaVisualiser({ pizza, cookStage = "raw" }: Props) {
   const stepMs = count > 0 ? MAKING_TOTAL_MS / count : 0;
 
   return (
-    <>
+    <div className={styles.wrap}>
       {cookStage === "ready" && <div className={styles.plate}></div>}
 
       <div className={`${styles.base} ${styles[cookStage]}`}>
@@ -80,6 +80,6 @@ export default function PizzaVisualiser({ pizza, cookStage = "raw" }: Props) {
           })}
         </div>
       </div>
-    </>
+    </div>
   );
 }

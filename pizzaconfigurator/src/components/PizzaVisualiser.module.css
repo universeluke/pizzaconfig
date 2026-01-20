@@ -1,9 +1,17 @@
+.wrap {
+  position: relative;
+  width: min(90vw, 70vh, 420px);
+  aspect-ratio: 1/1;
+  margin: 24px auto;
+  display: grid;
+  place-items: center;
+}
+
 .base {
   position: relative;
   width: min(90vw, 70vh, 420px);
   aspect-ratio: 1 /1;
   border-radius: 50%;
-  margin: 24px auto;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -70,11 +78,9 @@
 
 .plate {
   position: absolute;
-  justify-self: center;
   width: min(95vw, 75vh, 440px);
   aspect-ratio: 1 /1;
   border-radius: 50%;
-  margin: 14px auto;
   background-color: rgb(255, 255, 255);
 }
 

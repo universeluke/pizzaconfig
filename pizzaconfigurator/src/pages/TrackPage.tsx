@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { supabase } from "../supabaseClient";
 import BurgerMenu from "../components/BurgerMenu";
 import PizzaVisualiser from "../components/PizzaVisualiser";
+import styles from "./TrackPage.module.css";
 
 export default function TrackPage() {
   const { orderId } = useParams();
@@ -52,34 +53,42 @@ export default function TrackPage() {
   return (
     <div>
       <BurgerMenu />
-      <h2>TRACK ORDER</h2>
+      <h2 className={styles.title}>
+        <span className={styles.titleGreen}>TRACK</span>
+        <br />
+        <span className={styles.titleGreen}>YOUR</span>
+
+        <br />
+        <span className={styles.titleRed}>PIE</span>
+      </h2>
       {!order ? (
         <div>loading...</div>
       ) : (
         <>
           {order.status === "todo" && (
-            <>
-              <div>YOUR ORDER IS IN THE QUEUE</div>
-            </>
+            <div className={styles.trackContainer}>
+              <h3 className={styles.orderMessage}>YOUR PIE IS IN THE QUEUE</h3>
+            </div>
           )}
           {order.status === "in_progress" && (
-            <>
-              <div>YOUR ORDER IS BEING MADE</div>
+            <div className={styles.trackContainer}>
               <PizzaVisualiser pizza={order.pizza} cookStage="making" />
-            </>
+              <h3 className={styles.orderMessage}>YOUR PIE IS BEING MADE</h3>
+            </div>
           )}
           {order.status === "cooking" && (
-            <>
-              <div>YOUR ORDER IS IN THE OVEN</div>
+            <div className={styles.trackContainer}>
               <PizzaVisualiser pizza={order.pizza} cookStage="oven" />
-            </>
+              <h3 className={styles.orderMessage}>YOUR PIE IS IN THE OVEN</h3>
+            </div>
           )}
           {order.status === "done" && (
-            <>
-              <div>YOUR ORDER IS READY FOR COLLECTION!</div>
-
+            <div className={styles.trackContainer}>
               <PizzaVisualiser pizza={order.pizza} cookStage="ready" />
-            </>
+              <h3 className={styles.orderMessage}>
+                YOUR PIE IS READY FOR COLLECTION!
+              </h3>
+            </div>
           )}
         </>
       )}
