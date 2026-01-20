@@ -23,6 +23,6 @@ export const customerTestIds = {
     },
     pizzaOption: (option:string) => `pizza-option-${option}-test-id`,
     tracking: {
-        trackingMessage: (stage) => `${stage}-tracking-message-test-id`
+        trackingMessage: (stage: string) => `${stage}-tracking-message-test-id`
     }
 }

@@ -1,8 +1,10 @@
 .title {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  font-size: 60px;
+  font-family: "Jost", sans-serif;
+  font-size: 70px;
   line-height: 0.9;
-  letter-spacing: 1px;
+  font-weight: 600;
+  font-style: italic;
+  letter-spacing: -2px;
   margin: 0;
 }
 
@@ -15,7 +17,7 @@
 }
 
 .orderMessage {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Jost", sans-serif;
   font-size: 30px;
   line-height: 1.1;
   letter-spacing: 0px;

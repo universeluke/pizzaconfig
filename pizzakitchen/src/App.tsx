@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { supabase } from "./supabaseClient";
 import Column from "./components/Column";
+import styles from "./App.module.css";
 
 type Order = {
   id: string;
@@ -118,38 +119,38 @@ export default function App() {
 
   return (
     <div>
-      <h2>Kitchen</h2>
-      <div>signed in as {user.email}</div>
       <button onClick={signOut}>sign out</button>
       <button onClick={loadOrders}>load orders/refresh</button>
-      <Column
-        title="To do"
-        orders={todo}
-        onNext={(id) => updateStatus(id, "in_progress")}
-      />
-      <Column
-        title="In progress"
-        orders={inProgress}
-        onPrev={(id) => updateStatus(id, "todo")}
-        onNext={(id) => updateStatus(id, "cooking")}
-      />
-      <Column
-        title="Cooking"
-        orders={cooking}
-        onPrev={(id) => updateStatus(id, "in_progress")}
-        onNext={(id) => updateStatus(id, "done")}
-      />
-      <Column
-        title="Done"
-        orders={done}
-        onPrev={(id) => updateStatus(id, "cooking")}
-        onNext={(id) => updateStatus(id, "collected")}
-      />
-      <Column
-        title="Collected"
-        orders={collected}
-        onPrev={(id) => updateStatus(id, "done")}
-      />
+      <div className={styles.columnContainer}>
+        <Column
+          title="To do"
+          orders={todo}
+          onNext={(id) => updateStatus(id, "in_progress")}
+        />
+        <Column
+          title="In progress"
+          orders={inProgress}
+          onPrev={(id) => updateStatus(id, "todo")}
+          onNext={(id) => updateStatus(id, "cooking")}
+        />
+        <Column
+          title="Cooking"
+          orders={cooking}
+          onPrev={(id) => updateStatus(id, "in_progress")}
+          onNext={(id) => updateStatus(id, "done")}
+        />
+        <Column
+          title="Done"
+          orders={done}
+          onPrev={(id) => updateStatus(id, "cooking")}
+          onNext={(id) => updateStatus(id, "collected")}
+        />
+        <Column
+          title="Collected"
+          orders={collected}
+          onPrev={(id) => updateStatus(id, "done")}
+        />
+      </div>
     </div>
   );
 }

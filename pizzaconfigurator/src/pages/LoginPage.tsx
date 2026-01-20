@@ -31,6 +31,8 @@ export default function LoginPage() {
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         data-testid={customerTestIds.login.email}
+        type="email"
+        autoComplete="email"
       />
       <input
         placeholder="password"
@@ -38,6 +40,7 @@ export default function LoginPage() {
         value={password}
         onChange={(e) => setPassword(e.target.value)}
         data-testid={customerTestIds.login.password}
+        autoComplete="current-password"
       />
       <button type="submit" data-testid={customerTestIds.login.submit}>
         sign in

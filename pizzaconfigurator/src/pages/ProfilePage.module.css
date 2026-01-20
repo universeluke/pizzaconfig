@@ -1,0 +1,17 @@
+.title {
+  font-family: "Jost", sans-serif;
+  font-size: 70px;
+  line-height: 0.9;
+  font-weight: 600;
+  font-style: italic;
+  letter-spacing: -2px;
+  margin: 0;
+}
+
+.titleGreen {
+  color: var(--primary-green);
+}
+
+.titleRed {
+  color: rgba(157, 73, 73);
+}

@@ -10,12 +10,12 @@ export default function BasketItems() {
   let x = 1;
 
   return (
-    <div
+    <ul
       className={styles.list}
       data-testid={customerTestIds.basketItems.itemsList}
     >
       {basket.items.map((item) => (
-        <div className={styles.item} key={item.id}>
+        <li className={styles.item} key={item.id}>
           <span>PIE {x++}</span>
           <div className={styles.optionsList}>
             <span>{item.pizza.sauce} sauce</span>
@@ -51,8 +51,8 @@ export default function BasketItems() {
           >
             ×
           </button>
-        </div>
+        </li>
       ))}
-    </div>
+    </ul>
   );
 }
