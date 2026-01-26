@@ -33,7 +33,6 @@ export default function Basket() {
 
   async function handlePlaceOrder() {
     const { data } = await supabase.auth.getUser();
-    console.log(data);
     const userId = data.user?.id ?? "";
 
     const result = await placeOrder(supabase, userId, basket.items);

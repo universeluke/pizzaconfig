@@ -71,8 +71,6 @@ export default function RecentPizzaTrack() {
     };
   }, []);
 
-  console.log(orders);
-
   if (!loading && orders.length === 0) return null;
 
   return (
