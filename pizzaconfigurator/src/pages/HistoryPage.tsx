@@ -4,9 +4,17 @@ import { supabase } from "../supabaseClient";
 import BurgerMenu from "../components/BurgerMenu";
 import styles from "./HistoryPage.module.css";
 import PizzaVisualiser from "../components/PizzaVisualiser";
+import type { PizzaConfig } from "../store/pizzaSlice";
+
+type Order = {
+  id: string;
+  status: string;
+  created_at: string;
+  pizza: PizzaConfig;
+};
 
 export default function HistoryPage() {
-  const [orders, setOrders] = useState<any[]>([]);
+  const [orders, setOrders] = useState<Order[]>([]);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -32,14 +40,22 @@ export default function HistoryPage() {
     loadOrders();
   }, []);
 
+  const inProgressOrders = orders.filter(
+    (order) => order.status !== "collected",
+  );
+
+  const completedOrders = orders.filter(
+    (order) => order.status === "collected",
+  );
+
   return (
     <div>
       <BurgerMenu />
+
       <h2 className={styles.title}>
         <span className={styles.titleGreen}>YOUR</span>
         <br />
         <span className={styles.titleRed}>PIE</span>
-
         <br />
         <span className={styles.titleGreen}>HISTORY</span>
       </h2>
@@ -47,43 +63,99 @@ export default function HistoryPage() {
       {loading && <p>loading...</p>}
 
       <ul className={styles.list}>
-        {orders.map((order) => (
-          <li className={styles.item} key={order.id}>
-            <Link to={`/track/${order.id}`}>
-              <div className={styles.itemWrapper}>
-                <div className={styles.optionsList}>
+        <h3 className={styles.sectionTitle}>IN PROGRESS</h3>
+
+        {inProgressOrders.length === 0 ? (
+          <p>No active orders.</p>
+        ) : (
+          inProgressOrders.map((order) => (
+            <li className={styles.item} key={order.id}>
+              <Link to={`/track/${order.id}`} className={styles.itemLink}>
+                <PizzaVisualiser pizza={order.pizza} size="medium" />
+
+                <div className={styles.itemWrapper}>
                   <span>{new Date(order.created_at).toLocaleDateString()}</span>
                   <span>{order.pizza.sauce} sauce</span>
                   <span>
                     {order.pizza.cheese === "none" ? "no" : order.pizza.cheese}{" "}
                     cheese
                   </span>
+
                   <span>
-                    {order.pizza.toppings.map((topping: string | null) => (
+                    {order.pizza.toppings.map((topping: string) => (
                       <div key={topping}>{topping}</div>
                     ))}
                   </span>
+
                   <span>
-                    {order.pizza.oils.map((oil: string | null) => (
+                    {order.pizza.oils.map((oil: string) => (
                       <div key={oil}>{oil}</div>
                     ))}
                   </span>
+
                   <span>
-                    {order.pizza.herbs.map((herb: string | null) => (
+                    {order.pizza.herbs.map((herb: string) => (
                       <div key={herb}>{herb}</div>
                     ))}
                   </span>
+
                   <span>
-                    {order.pizza.dips.map((dip: string | null) => (
+                    {order.pizza.dips.map((dip: string) => (
                       <div key={dip}>{dip} dip</div>
                     ))}
                   </span>
                 </div>
-                <PizzaVisualiser pizza={order.pizza} />
-              </div>
-            </Link>
-          </li>
-        ))}
+              </Link>
+            </li>
+          ))
+        )}
+
+        <h3 className={styles.sectionTitle}>COMPLETED</h3>
+
+        {completedOrders.length === 0 ? (
+          <p>No completed orders yet.</p>
+        ) : (
+          completedOrders.map((order) => (
+            <li className={styles.item} key={order.id}>
+              <Link to={`/track/${order.id}`} className={styles.itemLink}>
+                <PizzaVisualiser pizza={order.pizza} size="medium" />
+
+                <div className={styles.itemWrapper}>
+                  <span>{new Date(order.created_at).toLocaleDateString()}</span>
+                  <span>{order.pizza.sauce} sauce</span>
+                  <span>
+                    {order.pizza.cheese === "none" ? "no" : order.pizza.cheese}{" "}
+                    cheese
+                  </span>
+
+                  <span>
+                    {order.pizza.toppings.map((topping: string) => (
+                      <div key={topping}>{topping}</div>
+                    ))}
+                  </span>
+
+                  <span>
+                    {order.pizza.oils.map((oil: string) => (
+                      <div key={oil}>{oil}</div>
+                    ))}
+                  </span>
+
+                  <span>
+                    {order.pizza.herbs.map((herb: string) => (
+                      <div key={herb}>{herb}</div>
+                    ))}
+                  </span>
+
+                  <span>
+                    {order.pizza.dips.map((dip: string) => (
+                      <div key={dip}>{dip} dip</div>
+                    ))}
+                  </span>
+                </div>
+              </Link>
+            </li>
+          ))
+        )}
       </ul>
     </div>
   );

@@ -2,6 +2,7 @@ import { useState } from "react";
 import styles from "./BurgerMenu.module.css";
 import { Link } from "react-router-dom";
 import { customerTestIds } from "../test/customerTestIds";
+import RecentPizzaTrack from "./RecentPizzaTrack";
 
 export default function BurgerMenu() {
   const [open, setOpen] = useState(false);
@@ -75,6 +76,7 @@ export default function BurgerMenu() {
                 PROFILE
               </Link>
             </nav>
+            <RecentPizzaTrack />
           </div>
         </div>
       )}

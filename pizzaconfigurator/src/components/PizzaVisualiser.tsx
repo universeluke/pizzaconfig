@@ -16,11 +16,16 @@ export type CookStage = "raw" | "making" | "oven" | "ready";
 type Props = {
   pizza: PizzaConfig;
   cookStage?: CookStage;
+  size?: "small" | "medium" | "large";
 };
 
 const MAKING_TOTAL_MS = 3000;
 
-export default function PizzaVisualiser({ pizza, cookStage = "raw" }: Props) {
+export default function PizzaVisualiser({
+  pizza,
+  cookStage = "raw",
+  size = "large",
+}: Props) {
   const layers: React.ReactNode[] = [];
 
   // sauce
@@ -50,10 +55,10 @@ export default function PizzaVisualiser({ pizza, cookStage = "raw" }: Props) {
   const stepMs = count > 0 ? MAKING_TOTAL_MS / count : 0;
 
   return (
-    <div className={styles.wrap}>
+    <div className={`${styles.wrap} ${styles[size]}`}>
       {cookStage === "ready" && <div className={styles.plate}></div>}
 
-      <div className={`${styles.base} ${styles[cookStage]}`}>
+      <div className={`${styles.base} ${styles[cookStage]} ${styles[size]}`}>
         <div className={cookStage === "making" ? styles.makingLoop : ""}>
           {layers.map((node, i) => {
             const delayMs = cookStage === "making" ? i * stepMs : 0;

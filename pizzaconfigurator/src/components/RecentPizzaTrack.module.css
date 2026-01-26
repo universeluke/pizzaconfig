@@ -1,0 +1,44 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  margin: 0px;
+  gap: 10px;
+  width: 100%;
+  padding-top: 60px;
+  margin: 10px 10px 10px 0px;
+}
+
+.item {
+  position: relative;
+  background-color: rgb(237, 250, 191);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 50px;
+  padding: 10px 20px;
+}
+
+.item::before {
+  content: "";
+  position: absolute;
+  inset: 0px 8px;
+  border-left: 4px solid var(--primary-green);
+  border-right: 4px solid var(--primary-green);
+}
+
+.message {
+  text-align: center;
+  text-decoration: none;
+  color: var(--primary-green);
+  font-weight: 500;
+}
+
+.heading {
+  color: var(--primary-beige);
+  text-decoration: none;
+  padding: 0px 12px;
+  border-left: 2px solid rgba(240, 234, 211, 0.737);
+  font-family: "Jost", sans-serif;
+  font-weight: 600;
+}

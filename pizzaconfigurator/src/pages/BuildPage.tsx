@@ -15,6 +15,7 @@ import BurgerMenu from "../components/BurgerMenu";
 import AddToBasket from "../components/AddToBasket";
 import Basket from "../components/Basket";
 import PizzaVisualizer from "../components/PizzaVisualiser";
+import RecentPizzaTrack from "../components/RecentPizzaTrack";
 
 function BuildPage() {
   const dispatch = useDispatch();
