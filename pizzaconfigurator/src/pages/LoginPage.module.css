@@ -1,4 +1,4 @@
-.title {
+.header {
   font-family: "Jost", sans-serif;
   font-size: 70px;
   line-height: 0.9;
@@ -6,27 +6,14 @@
   font-style: italic;
   letter-spacing: -2px;
   margin: 0;
-}
-
-.titleGreen {
   color: var(--primary-green);
 }
 
-.titleRed {
-  color: rgba(157, 73, 73);
+.secondaryColour {
+  color: var(--primary-red);
 }
 
-.email {
-  font-family: "Jost", sans-serif;
-  font-size: 50px;
-  line-height: 0.9;
-  font-weight: 600;
-  letter-spacing: -2px;
-  align-items: center;
-  justify-content: center;
-}
-
-.logoutButton {
+.signInButton {
   border: none;
   font-family: "Jost", sans-serif;
   font-size: 20px;
@@ -37,13 +24,31 @@
   border-radius: 3px;
   padding: 10px 20px;
   color: var(--primary-beige);
+  margin-top: 20px;
+}
+
+input {
+  border: none;
+  font-family: "Jost", sans-serif;
+  font-size: 20px;
+  line-height: 0.9;
+  font-weight: 500;
+  letter-spacing: 0px;
+  background-color: var(--primary-green);
+  border-radius: 3px;
+  padding: 5px 20px;
+  color: var(--primary-beige);
+}
+
+input::placeholder {
+  color: rgb(145, 190, 140);
 }
 
 .container {
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  padding: 130px 0px;
-  gap: 50px;
+  align-items: center;
+  gap: 10px;
+  margin-top: 100px;
 }

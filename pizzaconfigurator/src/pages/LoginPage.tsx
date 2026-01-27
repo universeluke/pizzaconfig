@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../supabaseClient";
 import { customerTestIds } from "../test/customerTestIds";
+import styles from "./LoginPage.module.css";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -25,26 +26,35 @@ export default function LoginPage() {
 
   return (
     <form onSubmit={onSubmit}>
-      <h2>Sign in</h2>
-      <input
-        placeholder="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        data-testid={customerTestIds.login.email}
-        type="email"
-        autoComplete="email"
-      />
-      <input
-        placeholder="password"
-        type="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        data-testid={customerTestIds.login.password}
-        autoComplete="current-password"
-      />
-      <button type="submit" data-testid={customerTestIds.login.submit}>
-        sign in
-      </button>
+      <h2 className={styles.header}>
+        SIGN<br></br>
+        <span className={styles.secondaryColour}>IN</span>
+      </h2>
+      <div className={styles.container}>
+        <input
+          placeholder="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          data-testid={customerTestIds.login.email}
+          type="email"
+          autoComplete="email"
+        />
+        <input
+          placeholder="password"
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          data-testid={customerTestIds.login.password}
+          autoComplete="current-password"
+        />
+        <button
+          className={styles.signInButton}
+          type="submit"
+          data-testid={customerTestIds.login.submit}
+        >
+          sign in
+        </button>
+      </div>
     </form>
   );
 }

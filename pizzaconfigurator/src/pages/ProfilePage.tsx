@@ -27,8 +27,18 @@ export default function ProfilePage() {
         <br />
         <span className={styles.titleGreen}>PROFILE</span>
       </h2>
-      {email ? <div>email: {email}</div> : <div>not signed in</div>}
-      <button onClick={logout}>logout</button>
+      {email ? (
+        <div className={styles.container}>
+          <div className={styles.email}>
+            signed in as:<br></br> {email}
+          </div>
+          <button className={styles.logoutButton} onClick={logout}>
+            LOGOUT
+          </button>
+        </div>
+      ) : (
+        <div>not signed in</div>
+      )}
     </div>
   );
 }
