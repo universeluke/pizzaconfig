@@ -15,7 +15,7 @@ import BurgerMenu from "../components/BurgerMenu";
 import AddToBasket from "../components/AddToBasket";
 import Basket from "../components/Basket";
 import PizzaVisualizer from "../components/PizzaVisualiser";
-import RecentPizzaTrack from "../components/RecentPizzaTrack";
+import { subscribeToPush } from "../push";
 
 function BuildPage() {
   const dispatch = useDispatch();
@@ -34,6 +34,13 @@ function BuildPage() {
     <>
       <BurgerMenu />
       <Basket />
+
+      <button
+        style={{ padding: "10px", marginBottom: "20px" }}
+        onClick={subscribeToPush}
+      >
+        enable push notif
+      </button>
 
       <h2 className={styles.title}>
         <span className={styles.titleGreen}>DESIGN</span>

@@ -6,6 +6,10 @@ import { Provider } from "react-redux";
 import { store } from "./store/store.ts";
 import { BrowserRouter } from "react-router-dom";
 
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("/sw.js");
+}
+
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <Provider store={store}>
@@ -13,5 +17,5 @@ createRoot(document.getElementById("root")!).render(
         <App />
       </BrowserRouter>
     </Provider>
-  </StrictMode>
+  </StrictMode>,
 );

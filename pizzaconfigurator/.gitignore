@@ -24,3 +24,6 @@ dist-ssr
 *.sw?
 
 .env
+
+push-server/.env
+push-server/node_modules
