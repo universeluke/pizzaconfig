@@ -16,13 +16,36 @@ import AddToBasket from "../components/AddToBasket";
 import Basket from "../components/Basket";
 import PizzaVisualizer from "../components/PizzaVisualiser";
 import { subscribeToPush } from "../push";
-
-const registration = await navigator.serviceWorker.ready;
-const existing = await registration.pushManager.getSubscription();
+import { useEffect, useState } from "react";
+import { customerTestIds } from "../test/customerTestIds";
 
 function BuildPage() {
   const dispatch = useDispatch();
   const pizza = useSelector((state: RootState) => state.pizza);
+
+  const [hasSubscription, setHasSubscription] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    async function check() {
+      if (!("serviceWorker" in navigator)) {
+        if (!cancelled) setHasSubscription(false);
+        return;
+      }
+
+      const reg = await navigator.serviceWorker.ready;
+      const sub = await reg.pushManager.getSubscription();
+
+      if (!cancelled) setHasSubscription(!!sub);
+    }
+
+    check();
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   const OPTIONS = {
     sauce: ["tomato", "pesto", "white", "bbq"],
@@ -38,16 +61,20 @@ function BuildPage() {
       <BurgerMenu />
       <Basket />
 
-      {!existing && (
+      {hasSubscription === false && (
         <button
+          data-testid={customerTestIds.enablePushButton}
           style={{ padding: "10px", marginBottom: "20px" }}
-          onClick={subscribeToPush}
+          onClick={async () => {
+            await subscribeToPush();
+            setHasSubscription(true);
+          }}
         >
           enable push notif
         </button>
       )}
 
-      <h2 className={styles.title}>
+      <h2 className={styles.title} data-testid={customerTestIds.title}>
         <span className={styles.titleGreen}>DESIGN</span>
         <br />
         <span className={styles.titleGreen}>YOUR</span>
@@ -116,6 +143,7 @@ function BuildPage() {
         <div className={styles.notesSection}>
           <h3 className={styles.notes}>NOTES FOR KITCHEN</h3>
           <textarea
+            data-testid={customerTestIds.kitchenNotesTextArea}
             className={styles.notesInput}
             value={pizza.notes}
             onChange={(e) => dispatch(setNotes(e.target.value))}

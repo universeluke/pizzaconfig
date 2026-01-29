@@ -24,5 +24,8 @@ export const customerTestIds = {
     pizzaOption: (option:string) => `pizza-option-${option}-test-id`,
     tracking: {
         trackingMessage: (stage: string) => `${stage}-tracking-message-test-id`
-    }
+    },
+    enablePushButton: 'enable-push-button-test-id',
+    kitchenNotesTextArea: 'kitchen-notes-text-area-test-id',
+    title: 'title-test-id',
 }
