@@ -1,3 +1,5 @@
+import { supabase } from "./supabaseClient";
+
 const PUBLIC_VAPID_KEY =
   "BBFbYwT_grl_-S06M9rAarHVV2Sr1xR7l_1GqfhECxYZmMpRH7py7rdTgwt8S1TPnjOZPAKfgT6YASvwSdDcrio";
 
@@ -21,6 +23,14 @@ export async function subscribeToPush() {
     return;
   }
 
+  const { data: userData } = await supabase.auth.getUser();
+  const user = userData.user;
+
+  if (!user) {
+    alert("please log in first");
+    return;
+  }
+
   const registration = await navigator.serviceWorker.ready;
 
   const subscription = await registration.pushManager.subscribe({
@@ -28,11 +38,32 @@ export async function subscribeToPush() {
     applicationServerKey: urlBase64ToUint8Array(PUBLIC_VAPID_KEY),
   });
 
-  await fetch("http://localhost:3001/subscribe", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(subscription),
-  });
+  const json = subscription.toJSON();
+
+  const endpoint = subscription.endpoint;
+  const p256dh = json.keys?.p256dh;
+  const auth = json.keys?.auth;
+
+  if (!p256dh || !auth) {
+    alert("push keys missing");
+    return;
+  }
+
+  const { error } = await supabase.from("push_subscriptions").upsert(
+    {
+      user_id: user.id,
+      endpoint,
+      p256dh,
+      auth,
+      user_agent: navigator.userAgent,
+    },
+    { onConflict: "user_id,endpoint" },
+  );
+
+  if (error) {
+    alert(error.message);
+    return;
+  }
 
   console.log("Subscribed:", subscription);
 }

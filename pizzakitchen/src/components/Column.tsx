@@ -2,6 +2,7 @@ import styles from "./Column.module.css";
 
 type Order = {
   id: string;
+  user_id: string;
   status: "todo" | "in_progress" | "cooking" | "done" | "collected";
   pizza: any;
 };
@@ -9,8 +10,8 @@ type Order = {
 export default function Column(props: {
   title: string;
   orders: Order[];
-  onPrev?: (id: string) => void;
-  onNext?: (id: string) => void;
+  onPrev?: (order: Order[]) => void;
+  onNext?: (order: Order[]) => void;
 }) {
   return (
     <div>
@@ -52,10 +53,10 @@ export default function Column(props: {
               )}
             </div>
             {props.onPrev && (
-              <button onClick={() => props.onPrev?.(order.id)}>Prev</button>
+              <button onClick={() => props.onPrev?.(order)}>Prev</button>
             )}
             {props.onNext && (
-              <button onClick={() => props.onNext?.(order.id)}>Next</button>
+              <button onClick={() => props.onNext?.(order)}>Next</button>
             )}
           </div>
         ))}

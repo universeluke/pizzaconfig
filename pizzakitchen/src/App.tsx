@@ -5,6 +5,7 @@ import styles from "./App.module.css";
 
 type Order = {
   id: string;
+  user_id: string;
   status: "todo" | "in_progress" | "cooking" | "done" | "collected";
   pizza: any;
 };
@@ -49,16 +50,34 @@ export default function App() {
     setOrders(data);
   }
 
-  async function updateStatus(id: string, status: Order["status"]) {
+  async function updateStatus(order: Order, status: Order["status"]) {
     const { error } = await supabase.functions.invoke("kitchen-update-status", {
-      body: { orderId: id, status },
+      body: { orderId: order.id, status },
     });
 
+    const messages: Record<Order["status"], string> = {
+      todo: "Your order is in the queue",
+      in_progress: "Your pizza is being prepared!",
+      cooking: "Your pizza is in the oven!",
+      done: "Your pizza is ready for collection!",
+      collected: "Enjoy your pizza!",
+    };
+
     if (error) {
-      //TODO make into toast
       alert(error.message);
       return;
     }
+
+    await fetch("http://localhost:3001/send", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        user_id: order.user_id,
+        title: "pizza update",
+        body: messages[status],
+      }),
+    });
+
     loadOrders();
   }
 
@@ -125,30 +144,30 @@ export default function App() {
         <Column
           title="To do"
           orders={todo}
-          onNext={(id) => updateStatus(id, "in_progress")}
+          onNext={(order) => updateStatus(order, "in_progress")}
         />
         <Column
           title="In progress"
           orders={inProgress}
-          onPrev={(id) => updateStatus(id, "todo")}
-          onNext={(id) => updateStatus(id, "cooking")}
+          onPrev={(order) => updateStatus(order, "todo")}
+          onNext={(order) => updateStatus(order, "cooking")}
         />
         <Column
           title="Cooking"
           orders={cooking}
-          onPrev={(id) => updateStatus(id, "in_progress")}
-          onNext={(id) => updateStatus(id, "done")}
+          onPrev={(order) => updateStatus(order, "in_progress")}
+          onNext={(order) => updateStatus(order, "done")}
         />
         <Column
           title="Done"
           orders={done}
-          onPrev={(id) => updateStatus(id, "cooking")}
-          onNext={(id) => updateStatus(id, "collected")}
+          onPrev={(order) => updateStatus(order, "cooking")}
+          onNext={(order) => updateStatus(order, "collected")}
         />
         <Column
           title="Collected"
           orders={collected}
-          onPrev={(id) => updateStatus(id, "done")}
+          onPrev={(order) => updateStatus(order, "done")}
         />
       </div>
     </div>
