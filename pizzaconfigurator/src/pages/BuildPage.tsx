@@ -17,6 +17,9 @@ import Basket from "../components/Basket";
 import PizzaVisualizer from "../components/PizzaVisualiser";
 import { subscribeToPush } from "../push";
 
+const registration = await navigator.serviceWorker.ready;
+const existing = await registration.pushManager.getSubscription();
+
 function BuildPage() {
   const dispatch = useDispatch();
   const pizza = useSelector((state: RootState) => state.pizza);
@@ -35,12 +38,14 @@ function BuildPage() {
       <BurgerMenu />
       <Basket />
 
-      <button
-        style={{ padding: "10px", marginBottom: "20px" }}
-        onClick={subscribeToPush}
-      >
-        enable push notif
-      </button>
+      {!existing && (
+        <button
+          style={{ padding: "10px", marginBottom: "20px" }}
+          onClick={subscribeToPush}
+        >
+          enable push notif
+        </button>
+      )}
 
       <h2 className={styles.title}>
         <span className={styles.titleGreen}>DESIGN</span>

@@ -49,21 +49,18 @@ export async function subscribeToPush() {
     return;
   }
 
-  const { error } = await supabase.from("push_subscriptions").upsert(
-    {
-      user_id: user.id,
-      endpoint,
-      p256dh,
-      auth,
-      user_agent: navigator.userAgent,
-    },
-    { onConflict: "user_id,endpoint" },
-  );
+await fetch("http://localhost:3001/subscribe", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({
+    user_id: user.id,
+    endpoint,
+    p256dh,
+    auth,
+    user_agent: navigator.userAgent,
+  }),
+});
 
-  if (error) {
-    alert(error.message);
-    return;
-  }
 
   console.log("Subscribed:", subscription);
 }
