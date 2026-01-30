@@ -2,18 +2,15 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { supabase } from "../supabaseClient";
 import PizzaVisualiser from "./PizzaVisualiser";
-import type { PizzaConfig } from "../store/pizzaSlice";
+import type { Order } from "../../../types/types";
 import styles from "./RecentPizzaTrack.module.css";
 
-type OrderLite = {
-  id: string;
-  status: string;
-  created_at: string;
-  pizza: PizzaConfig;
+type Props = {
+  closeMenu?: () => void;
 };
 
-export default function RecentPizzaTrack() {
-  const [orders, setOrders] = useState<OrderLite[]>([]);
+export default function RecentPizzaTrack({ closeMenu }: Props) {
+  const [orders, setOrders] = useState<Order[]>([]);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -78,7 +75,7 @@ export default function RecentPizzaTrack() {
       <h2 className={styles.heading}>ORDERS IN PROGRESS</h2>
       {loading && <p>CHECKING YOUR CURRENT ORDERS...</p>}
       {orders.map((o) => (
-        <Link key={o.id} to={`/track/${o.id}`}>
+        <Link key={o.id} to={`/track/${o.id}`} onClick={closeMenu}>
           <div className={styles.item}>
             <PizzaVisualiser pizza={o.pizza} size={"small"} />
             <span className={styles.message}>TAP TO VIEW THIS ORDER</span>

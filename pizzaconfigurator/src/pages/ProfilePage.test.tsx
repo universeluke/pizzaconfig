@@ -21,7 +21,7 @@ beforeEach(() => {
 });
 
 describe("ProfilePage", () => {
-  test("shows 'not signed in' when user is null", async () => {
+  test("that it shows 'not signed in' when user is null", async () => {
     supabase.auth.getUser.mockResolvedValueOnce({
       data: { user: null },
     });
@@ -33,7 +33,7 @@ describe("ProfilePage", () => {
     ).toBeInTheDocument();
   });
 
-  test("shows email when user is signed in", async () => {
+  test("that it shows the email when user is signed in", async () => {
     supabase.auth.getUser.mockResolvedValueOnce({
       data: { user: { email: "test@example.com" } },
     });
@@ -45,7 +45,7 @@ describe("ProfilePage", () => {
     ).toHaveTextContent("test@example.com");
   });
 
-  test("clicking logout calls supabase.auth.signOut", async () => {
+  test("that clicking logout calls supabase.auth.signOut", async () => {
     const user = userEvent.setup();
 
     supabase.auth.getUser.mockResolvedValueOnce({

@@ -1,14 +1,5 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
-
-export type PizzaConfig = {
-  sauce: string | null;
-  cheese: string | null;
-  toppings: string[];
-  oils: string[];
-  herbs: string[];
-  dips: string[];
-  notes: string;
-};
+import type { PizzaConfig } from "../../../types/types";
 
 const initialState: PizzaConfig = {
   sauce: null,

@@ -4,15 +4,8 @@ import { supabase } from "../supabaseClient";
 import BurgerMenu from "../components/BurgerMenu";
 import styles from "./HistoryPage.module.css";
 import PizzaVisualiser from "../components/PizzaVisualiser";
-import type { PizzaConfig } from "../store/pizzaSlice";
+import type { Order } from "../../../types/types";
 import { customerTestIds } from "../test/customerTestIds";
-
-type Order = {
-  id: string;
-  status: string;
-  created_at: string;
-  pizza: PizzaConfig;
-};
 
 export default function HistoryPage() {
   const [orders, setOrders] = useState<Order[]>([]);

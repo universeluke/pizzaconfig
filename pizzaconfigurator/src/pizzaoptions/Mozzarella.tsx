@@ -1,5 +1,5 @@
 import styles from "./Mozzarella.module.css";
-import type { CookStage } from "../components/PizzaVisualiser";
+import type { CookStage } from "../../../types/types";
 import { customerTestIds } from "../test/customerTestIds";
 
 type Props = { cookStage: CookStage };

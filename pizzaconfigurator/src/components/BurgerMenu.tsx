@@ -76,7 +76,7 @@ export default function BurgerMenu() {
                 PROFILE
               </Link>
             </nav>
-            <RecentPizzaTrack />
+            <RecentPizzaTrack closeMenu={closeMenu} />
           </div>
         </div>
       )}

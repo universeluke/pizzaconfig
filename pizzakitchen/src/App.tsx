@@ -2,83 +2,58 @@ import { useEffect, useState } from "react";
 import { supabase } from "./supabaseClient";
 import Column from "./components/Column";
 import styles from "./App.module.css";
-
-type Order = {
-  id: string;
-  user_id: string;
-  status: "todo" | "in_progress" | "cooking" | "done" | "collected";
-  pizza: any;
-};
+import {
+  loadOrdersApi,
+  sendStatusPush,
+  signInWithEmail,
+  signOutApi,
+  updateOrderStatus,
+} from "./utils/kitchenApi";
+import type { OrderLite } from "../../types/types";
 
 export default function App() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [user, setUser] = useState<any>("");
 
-  const [orders, setOrders] = useState<Order[]>([]);
+  const [orders, setOrders] = useState<OrderLite[]>([]);
 
   async function signIn() {
-    const { data, error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
-
-    if (error) {
-      //TODO make into toast
-      alert(error.message);
-      return;
+    try {
+      const user = await signInWithEmail(supabase, email, password);
+      setUser(user);
+    } catch (e: any) {
+      alert(e.message);
     }
-
-    setUser(data.user);
   }
 
   async function signOut() {
-    await supabase.auth.signOut();
-    setUser(null);
-    setOrders([]);
+    try {
+      await signOutApi(supabase);
+      setUser(null);
+      setOrders([]);
+    } catch (e: any) {
+      alert(e.message);
+    }
   }
 
   async function loadOrders() {
-    const { data, error } = await supabase.functions.invoke(
-      "kitchen-list-orders",
-    );
-    if (error) {
-      //TODO make into toast
-      alert(error.message);
-      return;
+    try {
+      const data = await loadOrdersApi(supabase);
+      setOrders(data);
+    } catch (e: any) {
+      alert(e.message);
     }
-    setOrders(data);
   }
 
-  async function updateStatus(order: Order, status: Order["status"]) {
-    const { error } = await supabase.functions.invoke("kitchen-update-status", {
-      body: { orderId: order.id, status },
-    });
-
-    const messages: Record<Order["status"], string> = {
-      todo: "Your order is in the queue",
-      in_progress: "Your pizza is being prepared!",
-      cooking: "Your pizza is in the oven!",
-      done: "Your pizza is ready for collection!",
-      collected: "Enjoy your pizza!",
-    };
-
-    if (error) {
-      alert(error.message);
-      return;
+  async function updateStatus(order: OrderLite, status: OrderLite["status"]) {
+    try {
+      await updateOrderStatus(supabase, order.id, status);
+      await sendStatusPush(order.user_id, status);
+      await loadOrders();
+    } catch (e: any) {
+      alert(e.message);
     }
-
-    await fetch("http://localhost:3001/send", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        user_id: order.user_id,
-        title: "pizza update",
-        body: messages[status],
-      }),
-    });
-
-    loadOrders();
   }
 
   useEffect(() => {

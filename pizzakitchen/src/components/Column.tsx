@@ -1,17 +1,11 @@
 import styles from "./Column.module.css";
-
-type Order = {
-  id: string;
-  user_id: string;
-  status: "todo" | "in_progress" | "cooking" | "done" | "collected";
-  pizza: any;
-};
+import type { OrderLite } from "../../../types/types";
 
 export default function Column(props: {
   title: string;
-  orders: Order[];
-  onPrev?: (order: Order[]) => void;
-  onNext?: (order: Order[]) => void;
+  orders: OrderLite[];
+  onPrev?: (order: OrderLite[]) => void;
+  onNext?: (order: OrderLite[]) => void;
 }) {
   return (
     <div>

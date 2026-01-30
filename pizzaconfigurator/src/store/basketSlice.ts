@@ -1,14 +1,7 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
-import type { PizzaConfig } from "./pizzaSlice";
+import type { BasketState } from "../../../types/types";
+import type { PizzaConfig } from "../../../types/types";
 
-export type BasketItem = {
-    id: string;
-    pizza: PizzaConfig
-}
-
-export type BasketState = {
-    items: BasketItem[];
-};
 
 const initialState: BasketState = {
     items: [],

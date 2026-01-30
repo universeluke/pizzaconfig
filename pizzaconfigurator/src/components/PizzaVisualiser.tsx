@@ -1,5 +1,5 @@
 import styles from "./PizzaVisualiser.module.css";
-import type { PizzaConfig } from "../store/pizzaSlice";
+import type { PizzaConfig } from "../../../types/types";
 import Tomato from "../pizzaoptions/Tomato";
 import Pepperoni from "../pizzaoptions/Pepperoni";
 import Mushrooms from "../pizzaoptions/Mushrooms";
@@ -10,8 +10,7 @@ import Pesto from "../pizzaoptions/Pesto";
 import White from "../pizzaoptions/White";
 import Mozzarella from "../pizzaoptions/Mozzarella";
 import Vegan from "../pizzaoptions/Vegan";
-
-export type CookStage = "raw" | "making" | "oven" | "ready";
+import type { CookStage } from "../../../types/types";
 
 type Props = {
   pizza: PizzaConfig;

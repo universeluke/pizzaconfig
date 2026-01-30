@@ -1,5 +1,5 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
-import type { BasketItem } from "../store/basketSlice";
+import type { BasketItem } from '../../../types/types'
 
 type Result =
   | { ok: true }
