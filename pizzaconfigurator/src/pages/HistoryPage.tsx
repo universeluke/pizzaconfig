@@ -5,6 +5,7 @@ import BurgerMenu from "../components/BurgerMenu";
 import styles from "./HistoryPage.module.css";
 import PizzaVisualiser from "../components/PizzaVisualiser";
 import type { PizzaConfig } from "../store/pizzaSlice";
+import { customerTestIds } from "../test/customerTestIds";
 
 type Order = {
   id: string;
@@ -75,33 +76,71 @@ export default function HistoryPage() {
 
                 <div className={styles.itemWrapper}>
                   <span>{new Date(order.created_at).toLocaleDateString()}</span>
-                  <span>{order.pizza.sauce} sauce</span>
-                  <span>
+                  <span
+                    data-testid={customerTestIds.history.sauce(
+                      order.id,
+                      order.pizza.sauce,
+                    )}
+                  >
+                    {order.pizza.sauce} sauce
+                  </span>
+                  <span
+                    data-testid={customerTestIds.history.cheese(
+                      order.id,
+                      order.pizza.cheese,
+                    )}
+                  >
                     {order.pizza.cheese === "none" ? "no" : order.pizza.cheese}{" "}
                     cheese
                   </span>
 
                   <span>
                     {order.pizza.toppings.map((topping: string) => (
-                      <div key={topping}>{topping}</div>
+                      <div
+                        key={topping}
+                        data-testid={customerTestIds.history.topping(
+                          order.id,
+                          topping,
+                        )}
+                      >
+                        {topping}
+                      </div>
                     ))}
                   </span>
 
                   <span>
                     {order.pizza.oils.map((oil: string) => (
-                      <div key={oil}>{oil}</div>
+                      <div
+                        data-testid={customerTestIds.history.oil(order.id, oil)}
+                        key={oil}
+                      >
+                        {oil}
+                      </div>
                     ))}
                   </span>
 
                   <span>
                     {order.pizza.herbs.map((herb: string) => (
-                      <div key={herb}>{herb}</div>
+                      <div
+                        data-testid={customerTestIds.history.herb(
+                          order.id,
+                          herb,
+                        )}
+                        key={herb}
+                      >
+                        {herb}
+                      </div>
                     ))}
                   </span>
 
                   <span>
                     {order.pizza.dips.map((dip: string) => (
-                      <div key={dip}>{dip} dip</div>
+                      <div
+                        data-testid={customerTestIds.history.dip(order.id, dip)}
+                        key={dip}
+                      >
+                        {dip} dip
+                      </div>
                     ))}
                   </span>
                 </div>

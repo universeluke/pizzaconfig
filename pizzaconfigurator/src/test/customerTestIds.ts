@@ -28,4 +28,17 @@ export const customerTestIds = {
     enablePushButton: 'enable-push-button-test-id',
     kitchenNotesTextArea: 'kitchen-notes-text-area-test-id',
     title: 'title-test-id',
+    history: {
+        sauce: (id:string, name:any) => `${id}-${name}-sauce-test-id`,
+        cheese: (id:string, name:any) => `${id}-${name}-cheese-test-id`,
+        topping: (id:string, name:any) => `${id}-${name}-topping-test-id`,
+        oil: (id:string, name:any) => `${id}-${name}-oil-test-id`,
+        herb: (id:string, name:any) => `${id}-${name}-herb-test-id`,
+        dip: (id:string, name:any) => `${id}-${name}-dip-test-id`,
+    },
+    profile: {
+        notSignedIn: 'not-signed-in-test-id',
+        logoutButton: 'logout-button-test-id',
+        signedInAs: 'signed-in-as-test-id'
+    }
 }
