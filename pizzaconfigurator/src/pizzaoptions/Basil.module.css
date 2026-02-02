@@ -4,36 +4,36 @@
   display: block;
 }
 
-.bbq {
+.basil {
   transition:
     fill 300ms ease,
     opacity 300ms ease;
 }
 
-.raw .bbq {
-  fill: #7a4e29;
+.raw .basil {
+  fill: #84bb76;
 }
 
-.making .bbq {
-  fill: #7a4e29;
+.making .basil {
+  fill: #84bb76;
 }
 
-.oven .bbq {
+.oven .basil {
   animation: cooking 3s infinite ease-in-out;
 }
 
-.ready .bbq {
-  fill: #4c2e16;
+.ready .basil {
+  fill: #7ca053;
 }
 
 @keyframes cooking {
   0% {
-    fill: #7a4e29;
+    fill: #84bb76;
   }
   50% {
-    fill: #4c2e16;
+    fill: #7ca053;
   }
   100% {
-    fill: #7a4e29;
+    fill: #84bb76;
   }
 }

@@ -4,36 +4,36 @@
   display: block;
 }
 
-.bbq {
+.onion {
   transition:
     fill 300ms ease,
     opacity 300ms ease;
 }
 
-.raw .bbq {
-  fill: #7a4e29;
+.raw .onion {
+  fill: #beb1c4;
 }
 
-.making .bbq {
-  fill: #7a4e29;
+.making .onion {
+  fill: #beb1c4;
 }
 
-.oven .bbq {
+.oven .onion {
   animation: cooking 3s infinite ease-in-out;
 }
 
-.ready .bbq {
-  fill: #4c2e16;
+.ready .onion {
+  fill: #a0889c;
 }
 
 @keyframes cooking {
   0% {
-    fill: #7a4e29;
+    fill: #beb1c4;
   }
   50% {
-    fill: #4c2e16;
+    fill: #a0889c;
   }
   100% {
-    fill: #7a4e29;
+    fill: #beb1c4;
   }
 }

@@ -27,3 +27,5 @@ dist-ssr
 
 push-server/.env
 push-server/node_modules
+
+coverage/

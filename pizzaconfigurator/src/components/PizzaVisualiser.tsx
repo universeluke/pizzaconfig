@@ -11,6 +11,11 @@ import White from "../pizzaoptions/White";
 import Mozzarella from "../pizzaoptions/Mozzarella";
 import Vegan from "../pizzaoptions/Vegan";
 import type { CookStage } from "../../../types/types";
+import Olives from "../pizzaoptions/Olives";
+import Onions from "../pizzaoptions/Onions";
+import Ham from "../pizzaoptions/Ham";
+import Basil from "../pizzaoptions/Basil";
+import Corn from "../pizzaoptions/Corn";
 
 type Props = {
   pizza: PizzaConfig;
@@ -45,10 +50,20 @@ export default function PizzaVisualiser({
     layers.push(<Pepperoni cookStage={cookStage} />);
   if (pizza.toppings.includes("mushroom"))
     layers.push(<Mushrooms cookStage={cookStage} />);
+  if (pizza.toppings.includes("olives"))
+    layers.push(<Olives cookStage={cookStage} />);
+  if (pizza.toppings.includes("onion"))
+    layers.push(<Onions cookStage={cookStage} />);
+  if (pizza.toppings.includes("ham"))
+    layers.push(<Ham cookStage={cookStage} />);
+  if (pizza.toppings.includes("corn"))
+    layers.push(<Corn cookStage={cookStage} />);
 
   // herbs
   if (pizza.herbs.includes("oregano"))
     layers.push(<Oregano cookStage={cookStage} />);
+  if (pizza.herbs.includes("basil"))
+    layers.push(<Basil cookStage={cookStage} />);
 
   const count = layers.length;
   const stepMs = count > 0 ? MAKING_TOTAL_MS / count : 0;

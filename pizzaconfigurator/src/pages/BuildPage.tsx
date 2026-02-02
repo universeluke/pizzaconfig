@@ -50,7 +50,7 @@ function BuildPage() {
   const OPTIONS = {
     sauce: ["tomato", "pesto", "white", "bbq"],
     cheese: ["fior di latte", "mozzarella", "vegan", "none"],
-    toppings: ["pepperoni", "mushroom", "onion", "ham"],
+    toppings: ["pepperoni", "mushroom", "onion", "ham", "olives", "corn"],
     oils: ["olive oil", "chilli oil"],
     herbs: ["oregano", "basil"],
     dips: ["garlic mayo", "bbq"],

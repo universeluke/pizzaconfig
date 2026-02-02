@@ -4,36 +4,36 @@
   display: block;
 }
 
-.bbq {
+.corn {
   transition:
     fill 300ms ease,
     opacity 300ms ease;
 }
 
-.raw .bbq {
-  fill: #7a4e29;
+.raw .corn {
+  fill: #e5d653;
 }
 
-.making .bbq {
-  fill: #7a4e29;
+.making .corn {
+  fill: #e5d653;
 }
 
-.oven .bbq {
+.oven .corn {
   animation: cooking 3s infinite ease-in-out;
 }
 
-.ready .bbq {
-  fill: #4c2e16;
+.ready .corn {
+  fill: #cbba21;
 }
 
 @keyframes cooking {
   0% {
-    fill: #7a4e29;
+    fill: #e5d653;
   }
   50% {
-    fill: #4c2e16;
+    fill: #cbba21;
   }
   100% {
-    fill: #7a4e29;
+    fill: #e5d653;
   }
 }
