@@ -15,7 +15,7 @@ import BurgerMenu from "../components/BurgerMenu";
 import AddToBasket from "../components/AddToBasket";
 import Basket from "../components/Basket";
 import PizzaVisualizer from "../components/PizzaVisualiser";
-import { subscribeToPush } from "../push";
+import { subscribeToPush } from "../utils/push";
 import { useEffect, useState } from "react";
 import { customerTestIds } from "../test/customerTestIds";
 

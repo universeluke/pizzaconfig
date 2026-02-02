@@ -1,4 +1,4 @@
-import { supabase } from "./supabaseClient";
+import { supabase } from "../supabaseClient";
 
 const PUBLIC_VAPID_KEY =
   "BBFbYwT_grl_-S06M9rAarHVV2Sr1xR7l_1GqfhECxYZmMpRH7py7rdTgwt8S1TPnjOZPAKfgT6YASvwSdDcrio";

@@ -25,6 +25,17 @@ export default defineConfig({
     environment: "jsdom",
     setupFiles: "./src/test/setup.ts",
     globals: true,
-    css: true
+    css: true,
+    coverage: {
+      provider: 'v8',
+      reporter: ['text', 'html'],
+      reportsDirectory: './coverage',
+      exclude: [
+    "**/sw.js",
+    "**/main.tsx",
+    "**/supabaseClient.ts",
+    "**/*.d.ts",
+  ],
+    }
   },
 });
