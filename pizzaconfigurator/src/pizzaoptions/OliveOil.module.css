@@ -1,0 +1,40 @@
+.svg {
+  width: 98%;
+  height: 98%;
+  display: block;
+}
+
+.oliveoil {
+  opacity: 0.4;
+  transition:
+    fill 300ms ease,
+    opacity 300ms ease;
+}
+
+.raw .oliveoil {
+  fill: #a7af2f;
+}
+
+.making .oliveoil {
+  fill: #a7af2f;
+}
+
+.oven .oliveoil {
+  animation: cooking 3s infinite ease-in-out;
+}
+
+.ready .oliveoil {
+  fill: rgb(202, 173, 46);
+}
+
+@keyframes cooking {
+  0% {
+    fill: #a7af2f;
+  }
+  50% {
+    fill: rgb(202, 173, 46);
+  }
+  100% {
+    fill: #a7af2f;
+  }
+}

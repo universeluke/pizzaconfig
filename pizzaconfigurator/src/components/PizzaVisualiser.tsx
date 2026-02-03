@@ -16,6 +16,9 @@ import Onions from "../pizzaoptions/Onions";
 import Ham from "../pizzaoptions/Ham";
 import Basil from "../pizzaoptions/Basil";
 import Corn from "../pizzaoptions/Corn";
+import OliveOil from "../pizzaoptions/OliveOil";
+import BalsamicDressing from "../pizzaoptions/BalsamicDressing";
+import HotHoney from "../pizzaoptions/HotHoney";
 
 type Props = {
   pizza: PizzaConfig;
@@ -64,6 +67,14 @@ export default function PizzaVisualiser({
     layers.push(<Oregano cookStage={cookStage} />);
   if (pizza.herbs.includes("basil"))
     layers.push(<Basil cookStage={cookStage} />);
+
+  // oils
+  if (pizza.oils.includes("olive oil"))
+    layers.push(<OliveOil cookStage={cookStage} />);
+  if (pizza.oils.includes("balsamic dressing"))
+    layers.push(<BalsamicDressing cookStage={cookStage} />);
+  if (pizza.oils.includes("hot honey"))
+    layers.push(<HotHoney cookStage={cookStage} />);
 
   const count = layers.length;
   const stepMs = count > 0 ? MAKING_TOTAL_MS / count : 0;

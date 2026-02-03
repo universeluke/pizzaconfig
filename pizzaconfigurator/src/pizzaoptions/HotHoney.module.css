@@ -1,0 +1,40 @@
+.svg {
+  width: 98%;
+  height: 98%;
+  display: block;
+}
+
+.hotHoney {
+  opacity: 0.5;
+  transition:
+    fill 300ms ease,
+    opacity 300ms ease;
+}
+
+.raw .hotHoney {
+  fill: rgb(224, 174, 10);
+}
+
+.making .hotHoney {
+  fill: rgb(224, 174, 10);
+}
+
+.oven .hotHoney {
+  animation: cooking 3s infinite ease-in-out;
+}
+
+.ready .hotHoney {
+  fill: rgb(216, 160, 4);
+}
+
+@keyframes cooking {
+  0% {
+    fill: rgb(224, 174, 10);
+  }
+  50% {
+    fill: rgb(216, 160, 4);
+  }
+  100% {
+    fill: rgb(224, 174, 10);
+  }
+}

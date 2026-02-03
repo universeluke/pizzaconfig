@@ -1,0 +1,40 @@
+.svg {
+  width: 98%;
+  height: 98%;
+  display: block;
+}
+
+.balsamicDressing {
+  opacity: 0.8;
+  transition:
+    fill 300ms ease,
+    opacity 300ms ease;
+}
+
+.raw .balsamicDressing {
+  fill: #643d66;
+}
+
+.making .balsamicDressing {
+  fill: #643d66;
+}
+
+.oven .balsamicDressing {
+  animation: cooking 3s infinite ease-in-out;
+}
+
+.ready .balsamicDressing {
+  fill: #502852;
+}
+
+@keyframes cooking {
+  0% {
+    fill: #643d66;
+  }
+  50% {
+    fill: #502852;
+  }
+  100% {
+    fill: #643d66;
+  }
+}

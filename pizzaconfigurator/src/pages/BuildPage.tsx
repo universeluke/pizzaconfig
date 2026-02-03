@@ -51,7 +51,7 @@ function BuildPage() {
     sauce: ["tomato", "pesto", "white", "bbq"],
     cheese: ["fior di latte", "mozzarella", "vegan", "none"],
     toppings: ["pepperoni", "mushroom", "onion", "ham", "olives", "corn"],
-    oils: ["olive oil", "chilli oil"],
+    oils: ["olive oil", "hot honey", "balsamic dressing"],
     herbs: ["oregano", "basil"],
     dips: ["garlic mayo", "bbq"],
   };
