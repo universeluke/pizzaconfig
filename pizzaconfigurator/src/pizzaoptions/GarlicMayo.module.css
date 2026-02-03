@@ -1,0 +1,21 @@
+.garlicMayo {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 70px;
+  transform: translateX(-25px) translateY(-50px);
+}
+
+.small {
+  height: 12px;
+  transform: translateX(-5px) translateY(-8px);
+}
+
+.medium {
+  height: 25px;
+  transform: translateX(-10px) translateY(-15px);
+}
+
+.oven {
+  display: none;
+}

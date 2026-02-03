@@ -1,0 +1,21 @@
+.bbqDip {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 70px;
+  transform: translateX(-10px) translateY(-20px);
+}
+
+.small {
+  height: 12px;
+  transform: translateX(-3px) translateY(-3px);
+}
+
+.medium {
+  height: 25px;
+  transform: translateX(-10px) translateY(0px);
+}
+
+.oven {
+  display: none;
+}

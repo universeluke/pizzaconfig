@@ -53,7 +53,7 @@ function BuildPage() {
     toppings: ["pepperoni", "mushroom", "onion", "ham", "olives", "corn"],
     oils: ["olive oil", "hot honey", "balsamic dressing"],
     herbs: ["oregano", "basil"],
-    dips: ["garlic mayo", "bbq"],
+    dips: ["garlic mayo", "bbq", "sriracha mayo"],
   };
 
   return (

@@ -19,6 +19,9 @@ import Corn from "../pizzaoptions/Corn";
 import OliveOil from "../pizzaoptions/OliveOil";
 import BalsamicDressing from "../pizzaoptions/BalsamicDressing";
 import HotHoney from "../pizzaoptions/HotHoney";
+import GarlicMayo from "../pizzaoptions/GarlicMayo";
+import BbqDip from "../pizzaoptions/BbqDip";
+import SrirachaMayo from "../pizzaoptions/SrirachaMayo";
 
 type Props = {
   pizza: PizzaConfig;
@@ -75,6 +78,14 @@ export default function PizzaVisualiser({
     layers.push(<BalsamicDressing cookStage={cookStage} />);
   if (pizza.oils.includes("hot honey"))
     layers.push(<HotHoney cookStage={cookStage} />);
+
+  // dips
+  if (pizza.dips.includes("garlic mayo"))
+    layers.push(<GarlicMayo size={size} cookStage={cookStage} />);
+  if (pizza.dips.includes("bbq"))
+    layers.push(<BbqDip size={size} cookStage={cookStage} />);
+  if (pizza.dips.includes("sriracha mayo"))
+    layers.push(<SrirachaMayo size={size} cookStage={cookStage} />);
 
   const count = layers.length;
   const stepMs = count > 0 ? MAKING_TOTAL_MS / count : 0;

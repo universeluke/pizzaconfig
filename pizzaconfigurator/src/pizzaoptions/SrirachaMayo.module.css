@@ -1,0 +1,21 @@
+.srirachaMayo {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 70px;
+  transform: translateX(30px) translateY(40px);
+}
+
+.small {
+  height: 12px;
+  transform: translateX(3px) translateY(7px);
+}
+
+.medium {
+  height: 25px;
+  transform: translateX(10px) translateY(17px);
+}
+
+.oven {
+  display: none;
+}
