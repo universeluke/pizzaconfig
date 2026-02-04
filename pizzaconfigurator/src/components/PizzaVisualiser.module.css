@@ -102,7 +102,7 @@
 }
 
 .makingLoop {
-  animation: makingLoop 4s infinite;
+  animation: makingLoop 5s infinite;
   transition: all 0.25s allow-discrete;
 }
 
@@ -116,8 +116,13 @@
   0% {
     display: block;
   }
+  80% {
+    display: block;
+    opacity: 1;
+  }
   85% {
     display: none;
+    opacity: 0;
   }
   100% {
     display: none;

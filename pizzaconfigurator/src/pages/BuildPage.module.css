@@ -47,3 +47,14 @@
   margin: 0;
   width: 80%;
 }
+
+.pizzaWrapper {
+  position: sticky;
+  top: 0;
+  padding: 10px 0;
+}
+
+.controlsWrapper {
+  overflow-y: auto;
+  max-height: calc(100vh - 480px);
+}

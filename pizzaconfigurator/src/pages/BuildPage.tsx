@@ -83,9 +83,11 @@ function BuildPage() {
         <span className={styles.titleRed}>PIE</span>
       </h2>
 
-      <PizzaVisualizer pizza={pizza} />
+      <div className={styles.pizzaWrapper}>
+        <PizzaVisualizer pizza={pizza} />
+      </div>
 
-      <div>
+      <div className={styles.controlsWrapper}>
         <AccordionSection
           title="SAUCE"
           options={OPTIONS.sauce}
