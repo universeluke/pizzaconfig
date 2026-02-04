@@ -77,4 +77,58 @@ describe("HistoryPage", () => {
       getByTestId(customerTestIds.history.topping("order-1", "pepperoni")),
     ).toHaveTextContent("pepperoni");
   });
+
+  test("shows an alert when supabase returns an error", async () => {
+    const alertSpy = vi.spyOn(window, "alert").mockImplementation(() => {});
+
+    resultFromSupabase.mockResolvedValueOnce({
+      data: null,
+      error: { message: "db BUSTED!" },
+    });
+
+    render(
+      <MemoryRouter>
+        <HistoryPage />
+      </MemoryRouter>,
+    );
+
+    expect(await screen.findByText("IN PROGRESS")).toBeInTheDocument();
+    expect(alertSpy).toHaveBeenCalledWith("db BUSTED!");
+
+    alertSpy.mockRestore();
+  });
+
+  test("renders completed orders in the completed section", async () => {
+    resultFromSupabase.mockResolvedValueOnce({
+      error: null,
+      data: [
+        {
+          id: "order-2",
+          status: "collected",
+          created_at: "right now yeahhh",
+          pizza: {
+            sauce: "bbq",
+            cheese: "none",
+            toppings: ["onion"],
+            oils: [],
+            herbs: [],
+            dips: [],
+            notes: "",
+          },
+        },
+      ],
+    });
+
+    render(
+      <MemoryRouter>
+        <HistoryPage />
+      </MemoryRouter>,
+    );
+
+    expect(await screen.findByText("COMPLETED")).toBeInTheDocument();
+
+    expect(screen.getByText("bbq sauce")).toBeInTheDocument();
+    expect(screen.getByText("no cheese")).toBeInTheDocument();
+    expect(screen.getByText("onion")).toBeInTheDocument();
+  });
 });

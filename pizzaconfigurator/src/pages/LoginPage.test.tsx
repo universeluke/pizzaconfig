@@ -8,6 +8,7 @@ vi.mock("../supabaseClient", () => ({
   supabase: {
     auth: {
       signInWithPassword: vi.fn(),
+      signUp: vi.fn(),
     },
   },
 }));
@@ -24,7 +25,7 @@ describe("LoginPage", () => {
     const { getByTestId } = render(
       <MemoryRouter>
         <LoginPage />
-      </MemoryRouter>
+      </MemoryRouter>,
     );
 
     expect(getByTestId(customerTestIds.login.email)).toBeInTheDocument();
@@ -37,7 +38,7 @@ describe("LoginPage", () => {
     const { getByTestId } = render(
       <MemoryRouter>
         <LoginPage />
-      </MemoryRouter>
+      </MemoryRouter>,
     );
 
     await user.click(getByTestId(customerTestIds.login.submit));
@@ -56,13 +57,13 @@ describe("LoginPage", () => {
     const { getByTestId } = render(
       <MemoryRouter>
         <LoginPage />
-      </MemoryRouter>
+      </MemoryRouter>,
     );
 
     await user.type(getByTestId(customerTestIds.login.email), "test@test.com");
     await user.type(
       getByTestId(customerTestIds.login.password),
-      "lukeisreallycool"
+      "lukeisreallycool",
     );
 
     await user.click(getByTestId(customerTestIds.login.submit));
@@ -70,6 +71,49 @@ describe("LoginPage", () => {
     expect(supabase.auth.signInWithPassword).toHaveBeenCalledWith({
       email: "test@test.com",
       password: "lukeisreallycool",
+    });
+  });
+
+  test("that it does not submit when password is missing", async () => {
+    const user = userEvent.setup();
+
+    const { getByTestId } = render(
+      <MemoryRouter>
+        <LoginPage />
+      </MemoryRouter>,
+    );
+
+    await user.type(getByTestId(customerTestIds.login.email), "test@test.com");
+
+    await user.click(getByTestId(customerTestIds.login.submit));
+
+    expect(supabase.auth.signInWithPassword).not.toHaveBeenCalled();
+  });
+
+  test("that it calls supabase signUp when in signup mode", async () => {
+    const user = userEvent.setup();
+
+    (supabase.auth.signUp as any).mockResolvedValue({
+      data: { user: { id: "123" } },
+      error: null,
+    });
+
+    const { getByText, getByTestId } = render(
+      <MemoryRouter>
+        <LoginPage />
+      </MemoryRouter>,
+    );
+
+    await user.click(getByText("need an account? sign up"));
+
+    await user.type(getByTestId(customerTestIds.login.email), "new@test.com");
+    await user.type(getByTestId(customerTestIds.login.password), "password123");
+
+    await user.click(getByTestId(customerTestIds.login.submit));
+
+    expect(supabase.auth.signUp).toHaveBeenCalledWith({
+      email: "new@test.com",
+      password: "password123",
     });
   });
 });
