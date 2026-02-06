@@ -113,8 +113,12 @@ export default function App() {
 
   return (
     <div>
-      <button onClick={signOut}>sign out</button>
-      <button onClick={loadOrders}>load orders/refresh</button>
+      <button className={styles.button} onClick={signOut}>
+        sign out
+      </button>
+      <button className={styles.button} onClick={loadOrders}>
+        load orders/refresh
+      </button>
       <div className={styles.columnContainer}>
         <Column
           title="To do"
