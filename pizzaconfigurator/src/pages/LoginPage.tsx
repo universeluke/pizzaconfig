@@ -10,6 +10,7 @@ export default function LoginPage() {
   const [mode, setMode] = useState<Mode>("signin");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const nav = useNavigate();
 
   async function onSubmit(e: React.FormEvent) {
@@ -30,6 +31,14 @@ export default function LoginPage() {
     }
 
     if (mode === "signup") {
+      if (password.length < 7) {
+        return alert("password must be at least 7 characters");
+      }
+
+      if (password !== confirmPassword) {
+        return alert("passwords do not match");
+      }
+
       const { error } = await supabase.auth.signUp({
         email,
         password,
@@ -77,6 +86,16 @@ export default function LoginPage() {
           data-testid={customerTestIds.login.password}
           autoComplete={mode === "signin" ? "current-password" : "new-password"}
         />
+        {mode === "signup" && (
+          <input
+            placeholder="confirm password"
+            type="password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            data-testid={customerTestIds.login.confirmPassword}
+            autoComplete="new-password"
+          />
+        )}
 
         <button
           className={styles.signInButton}

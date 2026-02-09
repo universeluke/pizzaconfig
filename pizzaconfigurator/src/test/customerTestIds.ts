@@ -10,7 +10,8 @@ export const customerTestIds = {
     login: {
         email: 'email-login-test-id',
         password: 'password-login-test-id',
-        submit: 'submit-login-test-id'
+        submit: 'submit-login-test-id',
+        confirmPassword: 'confirm-password-login-test-id'
     },
     basket: {
         addToBasketButton: 'add-to-basket-button-test-id',

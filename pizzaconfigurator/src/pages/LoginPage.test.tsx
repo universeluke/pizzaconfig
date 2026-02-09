@@ -108,6 +108,10 @@ describe("LoginPage", () => {
 
     await user.type(getByTestId(customerTestIds.login.email), "new@test.com");
     await user.type(getByTestId(customerTestIds.login.password), "password123");
+    await user.type(
+      getByTestId(customerTestIds.login.confirmPassword),
+      "password123",
+    );
 
     await user.click(getByTestId(customerTestIds.login.submit));
 
@@ -115,5 +119,51 @@ describe("LoginPage", () => {
       email: "new@test.com",
       password: "password123",
     });
+  });
+
+  test("that it blocks signup when confirm password does not match", async () => {
+    const user = userEvent.setup();
+
+    const { getByText, getByTestId } = render(
+      <MemoryRouter>
+        <LoginPage />
+      </MemoryRouter>,
+    );
+
+    await user.click(getByText("need an account? sign up"));
+
+    await user.type(getByTestId(customerTestIds.login.email), "new@test.com");
+    await user.type(getByTestId(customerTestIds.login.password), "password123");
+
+    await user.type(
+      getByTestId(customerTestIds.login.confirmPassword),
+      "different123",
+    );
+    await user.click(getByTestId(customerTestIds.login.submit));
+
+    expect(supabase.auth.signUp).not.toHaveBeenCalled();
+  });
+
+  test("that it blocks signup when password is shorter than 7 chars", async () => {
+    const user = userEvent.setup();
+
+    const { getByText, getByTestId } = render(
+      <MemoryRouter>
+        <LoginPage />
+      </MemoryRouter>,
+    );
+
+    await user.click(getByText("need an account? sign up"));
+
+    await user.type(getByTestId(customerTestIds.login.email), "new@test.com");
+    await user.type(getByTestId(customerTestIds.login.password), "123456");
+    await user.type(
+      getByTestId(customerTestIds.login.confirmPassword),
+      "123456",
+    );
+
+    await user.click(getByTestId(customerTestIds.login.submit));
+
+    expect(supabase.auth.signUp).not.toHaveBeenCalled();
   });
 });
