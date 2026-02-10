@@ -3,11 +3,18 @@ import type { RootState } from "../store/store";
 import { removeFromBasket } from "../store/basketSlice";
 import { customerTestIds } from "../test/customerTestIds";
 import styles from "./BasketItems.module.css";
+import { useNotification } from "../hooks/useToast";
 
 export default function BasketItems() {
   const basket = useSelector((state: RootState) => state.basket);
   const dispatch = useDispatch();
+  const notify = useNotification();
   let x = 1;
+
+  const handleRemoveItem = (id: string) => {
+    dispatch(removeFromBasket(id));
+    notify("item removed", { kind: "info", timeout: 3000 });
+  };
 
   return (
     <ul
@@ -47,7 +54,7 @@ export default function BasketItems() {
           <button
             data-testid={customerTestIds.basket.removeItemButton(item.id)}
             className={styles.removeButton}
-            onClick={() => dispatch(removeFromBasket(item.id))}
+            onClick={() => handleRemoveItem(item.id)}
           >
             ×
           </button>

@@ -1,0 +1,9 @@
+.stack {
+  position: fixed;
+  top: 1rem;
+  justify-self: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  z-index: 10000;
+}

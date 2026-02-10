@@ -1,6 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
 import pizzaReducer from "./pizzaSlice"
 import basketReducer from "./basketSlice"
+import notificationReducer from "./notificationSlice"
+
 
 const savedBasket = localStorage.getItem('basket')
 
@@ -9,7 +11,8 @@ const preloadedState = savedBasket ? { basket: JSON.parse(savedBasket) } : undef
 export const store = configureStore({
     reducer: {
         pizza: pizzaReducer,
-        basket: basketReducer
+        basket: basketReducer,
+        notification: notificationReducer
     },
     preloadedState
 })
