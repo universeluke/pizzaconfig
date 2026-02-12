@@ -3,6 +3,7 @@ import { popNotification } from "../store/notificationSlice";
 import type { RootState } from "../store/store";
 import NotificationItem from "./NotificationItem";
 import styles from "./NotificationStack.module.css";
+import { customerTestIds } from "../test/customerTestIds";
 
 export default function NotificationStack() {
   const dispatch = useDispatch();
@@ -13,7 +14,10 @@ export default function NotificationStack() {
   if (!notifications.length) return null;
 
   return (
-    <div className={styles.stack}>
+    <div
+      data-testid={customerTestIds.notification.notificationContainer}
+      className={styles.stack}
+    >
       {notifications.map((notif) => (
         <NotificationItem
           key={notif.id}

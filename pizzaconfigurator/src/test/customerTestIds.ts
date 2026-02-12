@@ -41,5 +41,11 @@ export const customerTestIds = {
         notSignedIn: 'not-signed-in-test-id',
         logoutButton: 'logout-button-test-id',
         signedInAs: 'signed-in-as-test-id'
+    },
+    notification: {
+        notificationDismissButton: 'notification-dismiss-button-test-id',
+        notification: 'notification-test-id',
+        notificationText: 'notification-text-test-id',
+        notificationContainer: 'notification-container-test-id'
     }
 }

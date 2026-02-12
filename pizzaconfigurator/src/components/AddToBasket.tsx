@@ -4,7 +4,7 @@ import { addToBasket } from "../store/basketSlice";
 import { resetPizza } from "../store/pizzaSlice";
 import { customerTestIds } from "../test/customerTestIds";
 import styles from "./AddToBasket.module.css";
-import { useNotification } from "../hooks/useToast";
+import { useNotification } from "../hooks/useNotification";
 
 export default function AddToBasket() {
   const dispatch = useDispatch();

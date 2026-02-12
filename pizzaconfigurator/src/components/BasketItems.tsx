@@ -3,7 +3,7 @@ import type { RootState } from "../store/store";
 import { removeFromBasket } from "../store/basketSlice";
 import { customerTestIds } from "../test/customerTestIds";
 import styles from "./BasketItems.module.css";
-import { useNotification } from "../hooks/useToast";
+import { useNotification } from "../hooks/useNotification";
 
 export default function BasketItems() {
   const basket = useSelector((state: RootState) => state.basket);

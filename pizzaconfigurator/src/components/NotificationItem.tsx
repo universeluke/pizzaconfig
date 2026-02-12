@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import styles from "./NotificationItem.module.css";
+import { customerTestIds } from "../test/customerTestIds";
 
 interface Props {
   id: string;
@@ -27,9 +28,19 @@ export default function NotificationItem({
   }, [id, timeout, onDismiss]);
 
   return (
-    <div className={`${styles.toast} ${styles[kind]}`}>
-      <span>{text}</span>
-      <button onClick={() => onDismiss(id)}>x</button>
+    <div
+      data-testid={customerTestIds.notification.notification}
+      className={`${styles.toast} ${styles[kind]}`}
+    >
+      <span data-testid={customerTestIds.notification.notificationText}>
+        {text}
+      </span>
+      <button
+        data-testid={customerTestIds.notification.notificationDismissButton}
+        onClick={() => onDismiss(id)}
+      >
+        x
+      </button>
     </div>
   );
 }
