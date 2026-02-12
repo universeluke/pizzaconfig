@@ -4,6 +4,7 @@ import { supabase } from "../supabaseClient";
 import PizzaVisualiser from "./PizzaVisualiser";
 import type { Order } from "../../../types/types";
 import styles from "./RecentPizzaTrack.module.css";
+import { customerTestIds } from "../test/customerTestIds";
 
 type Props = {
   closeMenu?: () => void;
@@ -71,12 +72,28 @@ export default function RecentPizzaTrack({ closeMenu }: Props) {
   if (!loading && orders.length === 0) return null;
 
   return (
-    <div className={styles.container}>
-      <h2 className={styles.heading}>ORDERS IN PROGRESS</h2>
+    <div
+      data-testid={customerTestIds.recentPizzaTrack.container}
+      className={styles.container}
+    >
+      <h2
+        data-testid={customerTestIds.recentPizzaTrack.title}
+        className={styles.heading}
+      >
+        ORDERS IN PROGRESS
+      </h2>
       {loading && <p>CHECKING YOUR CURRENT ORDERS...</p>}
       {orders.map((o) => (
-        <Link key={o.id} to={`/track/${o.id}`} onClick={closeMenu}>
-          <div className={styles.item}>
+        <Link
+          data-testid={customerTestIds.recentPizzaTrack.link}
+          key={o.id}
+          to={`/track/${o.id}`}
+          onClick={closeMenu}
+        >
+          <div
+            data-testid={customerTestIds.recentPizzaTrack.item}
+            className={styles.item}
+          >
             <PizzaVisualiser pizza={o.pizza} size={"small"} />
             <span className={styles.message}>TAP TO VIEW THIS ORDER</span>
           </div>

@@ -47,5 +47,11 @@ export const customerTestIds = {
         notification: 'notification-test-id',
         notificationText: 'notification-text-test-id',
         notificationContainer: 'notification-container-test-id'
+    },
+    recentPizzaTrack:{
+        container: 'recent-pizza-track-container-test-id',
+        title: 'recent-pizza-track-title-test-id',
+        item: 'recent-pizza-track-item-test-id',
+        link:'recent-pizza-track-link-test-id'
     }
 }
